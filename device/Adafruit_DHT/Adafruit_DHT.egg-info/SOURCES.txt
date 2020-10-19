@@ -7,6 +7,7 @@ Adafruit_DHT/Raspberry_Pi_2.py
 Adafruit_DHT/Test.py
 Adafruit_DHT/__init__.py
 Adafruit_DHT/common.py
+Adafruit_DHT/dht22.py
 Adafruit_DHT/platform_detect.py
 Adafruit_DHT.egg-info/PKG-INFO
 Adafruit_DHT.egg-info/SOURCES.txt
