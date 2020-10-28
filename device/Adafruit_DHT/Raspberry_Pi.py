@@ -1,5 +1,5 @@
-from . import common
-from . import Raspberry_Pi_Driver as driver
+from device.Adafruit_DHT import common
+from device.Adafruit_DHT.Adafruit_DHT import Raspberry_Pi_Driver as driver
 
 def read(sensor, pin):
     # Validate pin is a valid GPIO.
