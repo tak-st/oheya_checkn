@@ -11,11 +11,7 @@ connection = MySQLdb.connect(host='air-data.cheanwi3tf0d.ap-northeast-1.rds.amaz
 cursor = connection.cursor()
 
 SENSOR_TYPE = DHT.DHT22
-
 DHT_GPIO = 4
-
-
-
 
 # Define some device parameters
 I2C_ADDR  = 0x27 # I2C device address, if any error, change this address to 0x3f
@@ -107,7 +103,6 @@ def main():
         lcd_string("tem" + "{0:0.1f}" . format(t) + " humi" + "{0:0.1f}" . format(h),LCD_LINE_2)
         
         try:
-            #cursor.execute("INSERT INTO device VALUES('" + str(mac) + "','" + "DHT" + "')")
             cursor.execute("INSERT INTO device_data VALUES('" + str(mac) + "','" + "Temp" + "','" + str(t1) + "','" + str(time) + "')")
             cursor.execute("INSERT INTO device_data VALUES('" + str(mac) + "','" + "Humid" + "','" + str(h1) + "','" + str(time) + "')")
                 
