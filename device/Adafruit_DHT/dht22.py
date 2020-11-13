@@ -1,25 +1,17 @@
-#!home/pi/Adafruit_Python_DHT
-# coding: utf-8
-
-# _____ _____ _____ __ __ _____ _____ 
-#|     |   __|     |  |  |     |     |
-#|  |  |__   |  |  |_   _|  |  |  |  |
-#|_____|_____|_____| |_| |_____|_____|
-#
-# Project Tutorial Url:http://osoyoo.com/?p=1031
-#
+from uuid import getnode as get_mac
 import Adafruit_DHT as DHT
 import smbus
 import time
 import datetime
+import MySQLdb
+import random
+import math
 
+connection = MySQLdb.connect(host='air-data.cheanwi3tf0d.ap-northeast-1.rds.amazonaws.com',user='root',passwd='Ar4dBV8J',db='air_data',charset='utf8')
+cursor = connection.cursor()
 
 SENSOR_TYPE = DHT.DHT22
-
 DHT_GPIO = 4
-
-
-
 
 # Define some device parameters
 I2C_ADDR  = 0x27 # I2C device address, if any error, change this address to 0x3f
@@ -93,25 +85,36 @@ def lcd_string(message,line):
     lcd_byte(ord(message[i]),LCD_CHR)
 
 def main():
-  # Main program block
-  
+    
+    lcd_init()
+    random.seed(get_mac())
+    
+    
+    while True:
+        h,t = DHT.read_retry(SENSOR_TYPE,DHT_GPIO)
+        time = datetime.datetime.now()
+        now = time.strftime('%H:%M:%S')
+        t1 = "{0:0.1f}" . format(t)
+        h1 = "{0:0.1f}" . format(h)
+        mac = math.floor(random.random()*1000000)
+        
 
-  # Initialise display
-  lcd_init()
-  
+        lcd_string(now,LCD_LINE_1)
+        lcd_string("tem" + "{0:0.1f}" . format(t) + " humi" + "{0:0.1f}" . format(h),LCD_LINE_2)
+        
+        try:
+            cursor.execute("INSERT INTO device_data VALUES('" + str(mac) + "','" + "Temp" + "','" + str(t1) + "','" + str(time) + "')")
+            cursor.execute("INSERT INTO device_data VALUES('" + str(mac) + "','" + "Humid" + "','" + str(h1) + "','" + str(time) + "')")
+                
+        except MySQLdb.Error as e:
+            print(e)
+            
+        break
 
-  while True:
-    now = datetime.datetime.now()
-    h,t = DHT.read_retry(SENSOR_TYPE,DHT_GPIO)
-
-    # Send some test
-    lcd_string(now.strftime('%H:%M:%S'),LCD_LINE_1)
-    lcd_string("tem" + "{0:0.1f}" . format(t) + " humi" + "{0:0.1f}" . format(h),LCD_LINE_2)
-
-    time.sleep(1)
-  
-  
-
+    connection.commit()
+    connection.close()
+    
+        
 if __name__ == '__main__':
 
   try:
@@ -120,6 +123,3 @@ if __name__ == '__main__':
     pass
   finally:
     lcd_byte(0x01, LCD_CMD)
-
-
-

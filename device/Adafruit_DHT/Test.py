@@ -1,5 +1,5 @@
-from . import common
-from . import Test_Driver as driver
+from device.Adafruit_DHT import common
+from device.Adafruit_DHT.Adafruit_DHT import Test_Driver as driver
 
 def read(sensor, pin):
     # Get a reading from C driver code.

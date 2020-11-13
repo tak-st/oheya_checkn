@@ -1,7 +1,7 @@
 import re
 
-from . import common
-from . import Beaglebone_Black_Driver as driver
+from device.Adafruit_DHT import common
+from device.Adafruit_DHT.Adafruit_DHT import Beaglebone_Black_Driver as driver
 
 
 # Define mapping of pin names to GPIO base and number.

@@ -1,7 +1,6 @@
 import time
 
-from . import platform_detect
-
+from device.Adafruit_DHT import platform_detect
 
 # Define error constants.
 DHT_SUCCESS        =  0
