@@ -19,14 +19,14 @@
         "react-native-material-ripple": "^0.9.1",
         "react-native-modal": "^11.5.6",
         "react-native-storage": "^1.0.1",
-        "react-native-web": "~0.13.12",
+        "react-native-web": "~0.14.8",
         "unstated-next": "^1.1.0"
     },
     "devDependencies": {
         "@types/react": "~16.9.35",
         "@types/react-dom": "~16.9.8",
         "@types/react-native": "~0.63.2",
-        "react-native-web": "~0.13.7",
+        "react-native-web": "~0.14.8",
         "typescript": "~3.9.5"
     },
     "private": true
