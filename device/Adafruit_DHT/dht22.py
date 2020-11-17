@@ -1,13 +1,9 @@
 from uuid import getnode as get_mac
 import Adafruit_DHT as DHT
-import smbus
-import time
-import datetime
-import MySQLdb
-import random
-import math
-
-connection = MySQLdb.connect(host='air-data.cheanwi3tf0d.ap-northeast-1.rds.amazonaws.com',user='root',passwd='Ar4dBV8J',db='air_data',charset='utf8')
+import smbus,time,datetime,pymysql,random,math
+from device import connect_database as db
+pymysql.install_as_MySQLdb()
+connection = db.connect_air_database()
 cursor = connection.cursor()
 
 SENSOR_TYPE = DHT.DHT22
@@ -106,7 +102,7 @@ def main():
             cursor.execute("INSERT INTO device_data VALUES('" + str(mac) + "','" + "Temp" + "','" + str(t1) + "','" + str(time) + "')")
             cursor.execute("INSERT INTO device_data VALUES('" + str(mac) + "','" + "Humid" + "','" + str(h1) + "','" + str(time) + "')")
                 
-        except MySQLdb.Error as e:
+        except pymysql.Error as e:
             print(e)
             
         break

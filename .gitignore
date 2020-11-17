@@ -51,3 +51,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# データベース接続情報を保存しているファイルです。
+device/connect_database.py
