@@ -54,3 +54,5 @@ Temporary Items
 
 # データベース接続情報を保存しているファイルです。
 device/connect_database.py
+
+Front/oheya_checkn/debug.log
