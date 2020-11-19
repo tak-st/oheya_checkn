@@ -23,7 +23,7 @@
         "package.json": "^2.0.1",
         "react": "16.13.1",
         "react-dom": "16.13.1",
-        "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.2.tar.gz",
+        "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz",
         "react-native-elements": "^2.3.2",
         "react-native-gesture-handler": "~1.7.0",
         "react-native-linear-gradient": "^2.5.6",
@@ -33,7 +33,7 @@
         "react-native-safe-area-context": "3.1.4",
         "react-native-screens": "~2.10.1",
         "react-native-storage": "^1.0.1",
-        "react-native-web": "^0.14.8",
+        "react-native-web": "~0.13.7",
         "unstated-next": "^1.1.0"
     },
     "devDependencies": {
@@ -41,7 +41,7 @@
         "@types/react-dom": "~16.9.8",
         "@types/react-native": "~0.63.2",
         "react-native-web": "~0.13.7",
-        "typescript": "~3.9.5"
+        "typescript": "~3.9.2"
     },
     "private": true
 }
