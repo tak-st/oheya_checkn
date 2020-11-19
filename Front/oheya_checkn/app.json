@@ -1,6 +1,6 @@
 {
     "expo": {
-        "name": "oheya_checkn",
+        "name": "お部屋チェックン",
         "slug": "oheya_checkn",
         "version": "1.0.0",
         "orientation": "portrait",
@@ -8,7 +8,7 @@
         "splash": {
             "image": "./assets/splash.png",
             "resizeMode": "contain",
-            "backgroundColor": "#ffffff"
+            "backgroundColor": "##baf2a9"
         },
         "updates": {
             "fallbackToCacheTimeout": 0
