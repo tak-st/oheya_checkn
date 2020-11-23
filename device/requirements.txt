@@ -3,3 +3,5 @@ PyMySQL==0.10.1
 pytz==2020.4
 PyYAML==5.3.1
 zope.interface==5.2.0
+Adafruit-DHT==1.4.0
+mojmoji==0.0.11
