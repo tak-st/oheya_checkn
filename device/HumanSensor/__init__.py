@@ -1,1 +1,1 @@
-from HumanSensor import *
+from humansensor import *

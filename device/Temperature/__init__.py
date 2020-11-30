@@ -1,1 +1,1 @@
-from Temperature import *
+from temperature import *
