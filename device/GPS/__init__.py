@@ -1,1 +1,1 @@
-from GPS import *
+from gps import *

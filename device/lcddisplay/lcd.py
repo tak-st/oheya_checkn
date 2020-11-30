@@ -1,7 +1,7 @@
 import smbus
 import time
 
-class LCD:
+class Lcd:
     def __init__(self, pi_rev = 2, i2c_addr = 0x3F, backlight = True):
 
         # device constants

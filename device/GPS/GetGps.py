@@ -1,9 +1,9 @@
 # coding:utf-8
 import serial
-import micropyGPS
+from gps import micropyGPS
 import time
 
-def getgps():
+def get_gps():
     gps = micropyGPS.MicropyGPS(9, 'dd') # MicroGPSオブジェクトを生成する
         # 引数はタイムゾーンの時差と出力フォーマット
     #s = serial.Serial('/dev/serial0', 9600, timeout=10)
