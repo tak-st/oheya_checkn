@@ -1,1 +1,1 @@
-from lcd from *
+from lcddisplay import *
