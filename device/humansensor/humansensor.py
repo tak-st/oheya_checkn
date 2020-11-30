@@ -20,13 +20,13 @@ if __name__=='__main__':
             #センサー感知
             if(GPIO.input(GPIO_PIN)==GPIO.HIGH):
                 now=datetime.now().strftime('%Y/%m/%d %H:%M:%S')
-                
+
                 print(now+":"+str("{0:05d}".format(cnt)) + "回目の人感知")
                 cnt+=1
                 time.sleep(sleeptime)
-        else:
-            print(GPIO.input(GPIO_PIN))
-            time.sleep(interval)
+            else:
+                print(GPIO.input(GPIO_PIN))
+                time.sleep(interval)
     except KeyboardInterrupt:
         print("終了処理中…")
     finally:
