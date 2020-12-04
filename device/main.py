@@ -1,35 +1,38 @@
 import time
 from gps import getgps as gps
 from humansensor import humansensor as human
-from lcddisplay import jlcd
 from temperature import temperature as temp
 from co2 import getco2 as co2
 
 lcd = jlcd.Jlcd(2,0x27,True)
 
-while 1 :
-  try :
-    temp_val = temp.get_temperature()
-    gps_val = gps.get_gps()
-    co2_val = co2.get_co2()
+device_id = 1111
 
-    print("~~~~~~~")
-    time.sleep(1)
+def main_loop():
+  while True :
+    try :
 
-    print(temp_val)
-    lcd.message(str(temp_val["temp"]))
-    time.sleep(5)
+      temp_data = mesdata.MeasureClass(temp.get_temperature(), device_id)
+      gps_data = mesdata.MeasureClass(gps.get_gps(), device_id)
+      co2_data = mesdata.MeasureClass(co2.read_all(), device_id)
 
-    print(gps_val)
-    lcd.message(str(gps_val["latitude"]), 1)
-    lcd.message(str(gps_val["longitude"]), 2)
-    time.sleep(5)
+      print("~~~~~~~")
+      time.sleep(1)
 
-    print(co2_val)
-    lcd.message(str(co2_val))
-    time.sleep(5)
+      temp_data.data_print()
+      co2_data.data_print()
+      gps_data.dataprint()
 
-    time.sleep(10)
+      time.sleep(3)
+      except KeyboardInterrupt:
+        break
 
-  except KeyboardInterrupt:
-    break
+thread_main = threading.Thread(target = main_loop)
+thread_human = threading.Thread(target = human.get_human)
+thread_main.setDaemon(True)
+thread_human.setDaemon(True)
+thread_main.start()
+thread_human.start()
+
+while True:
+  pass
