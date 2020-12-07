@@ -1,7 +1,7 @@
 import mojimoji
 from lcddisplay import lcd
 
-class Jlcd(lcd):
+class Jlcd(lcd.Lcd):
 
     # message method override
     def message(self, string, line = 1):
