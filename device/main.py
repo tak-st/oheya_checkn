@@ -1,9 +1,9 @@
 import time
+from co2 import getco2 as co2
 from gps import getgps as gps
 from humansensor import humansensor as human
-from temperature import temperature as temp
-from co2 import getco2 as co2
 from lcddisplay import jlcd as lcd
+from temperature import temperature as temp
 
 # ボタンを繋いだGPIOの識別番号
 button_pin1 = 18
@@ -46,14 +46,14 @@ def main_loop():
         # ボタンを押すと「0」、放すと「1」になる
         # GPIOの状態が0V(0)であるか比較
         if (wiringpi.digitalRead(button_pin1) == 0):
-            if flg1 == False:
+            if flg1 is False:
                 cnt += 1
             flg1 = True
         else:
             flg1 = False
 
         if (wiringpi.digitalRead(button_pin2) == 0):
-            if flg2 == False:
+            if flg2 is False:
                 cnt -= 1
 
             if cnt == -1:
