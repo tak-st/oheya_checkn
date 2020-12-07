@@ -12,18 +12,47 @@ def main_loop():
   while True :
     try :
 
-      temp_data = mesdata.MeasureClass(temp.get_temperature(), device_id)
-      gps_data = mesdata.MeasureClass(gps.get_gps(), device_id)
-      co2_data = mesdata.MeasureClass(co2.read_all(), device_id)
+      #各センサーのデータ取得
+      temp_data = temp.get_temperature()
+      gps_data = gps.get_gps()
+      co2_data = co2.read_all()
 
-      print("~~~~~~~")
-      time.sleep(1)
+      """
+      ここにスイッチを判別する条件分岐
+      """
 
-      temp_data.data_print()
-      co2_data.data_print()
-      gps_data.dataprint()
+      if temp_data is not None :
+        Temperature = mesdata.MeasureClass(temp_data, device_id)
+        Temperature.data_print()
+        """
+        ここをflgでif分岐してください
+        Temperature.data_display()
+        """
+      else:
+        print("temperature is none")
+
+      if gps_data is not None :
+        Gps = mesdata.MeasureClass(gps_data, device_id)
+        Gps.data_print()
+        """
+        ここをスイッチのflgでif分岐してください
+        Gps.data_display()
+        """
+      else:
+        print("gps is none")
+
+      if co2_data is not None :
+        Co2 = mesdata.MeasureClass(co2_data, device_id)
+        Co2.data_print()
+        """
+        ここをスイッチのflgでif分岐してください
+        Co2.data_display()
+        """
+      else:
+        print("co2 is none")
 
       time.sleep(3)
+
       except KeyboardInterrupt:
         break
 
