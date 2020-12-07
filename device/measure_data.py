@@ -17,7 +17,7 @@ class MeasureClass:
       lcd.message("シツド : " + str(self.measure_data["humidity"]), 2)
     elif "co2" in self.measure_data:
       lcd.message("CO2 : " + str(self.measure_data["co2"]), 1)
-      cd.message("", 2)
+      lcd.message("", 2)
     elif "latitude" in self.measure_data:
       lcd.message("イド : " + str(self.measure_data["latitude"]), 1)
       lcd.message("ケイド : " + str(self.measure_data["longitude"]), 2)
