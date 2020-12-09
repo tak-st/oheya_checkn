@@ -119,3 +119,33 @@ class FirstSetup:
             self.lcd.msssage("failed", 2)
 
             return False
+
+class SetUp:
+    def __init__(self):
+        #MACアドレスをランダムなシード値で再作成
+        random.seed(get_mac())
+        self.mac = math.floor(random.random()*1000000)
+        pymysql.install_as_MySQLdb()
+        self.lcd = jlcd.Jlcd(2,0x27,True)
+
+    def check_device_id(self):
+        connection = db.connect_air_database()
+        device_id = 0
+        try:
+            with connection.cursor() as cursor:
+                sql = f'''SELECT device_id FROM device WHERE device_id = {self.mac}'''
+                cursor.execute(sql)
+                device_id = cursor.rowcount
+        finally:
+            connection.close()
+
+        if device_id == self.mac:
+            lcd.message("connection", 1)
+            lcd.msssage("successful", 2)
+
+            return True
+        else:
+            self.lcd.message("connection", 1)
+            self.lcd.msssage("failed", 2)
+
+            return False
