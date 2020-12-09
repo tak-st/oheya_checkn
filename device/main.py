@@ -15,8 +15,8 @@ button_pin2 = 23
 wiringpi.wiringPiSetupGpio()
 
 # GPIOを出力モード(1)に設定
-wiringpi.pinMode(button_pin1,0)
-wiringpi.pinMode(button_pin2,0)
+wiringpi.pinMode(button_pin1, 0)
+wiringpi.pinMode(button_pin2, 0)
 
 # 端子に何も接続されていない場合の状態を設定
 # 3.3Vの場合には「2」（プルアップ）
@@ -33,20 +33,20 @@ cnt = 0
 
 
 def push_button():
-    # ボタン入力を識別
-    # GPIO端子の状態を読み込む
-    # ボタンを押すと「0」、放すと「1」になる
-    # GPIOの状態が0V(0)であるか比較
-
-    global cnt
     # チャタリング対策用
     flg1 = False
     flg2 = False
+    global cnt
+
     while True:
+        # ボタン入力を識別
+        # GPIO端子の状態を読み込む
+        # ボタンを押すと「0」、放すと「1」になる
+        # GPIOの状態が0V(0)であるか比較
         if (wiringpi.digitalRead(button_pin1) == 0):
             if flg1 is False:
                 cnt += 1
-            flg1 = True
+                flg1 = True
         else:
             flg1 = False
 
@@ -104,7 +104,8 @@ def main_loop():
         except KeyboardInterrupt:
             break
 
-thread_main = threading.Thread(target = main_loop)
+
+thread_main = threading.Thread(target=main_loop)
 thread_human = threading.Thread(target=human.get_human)
 thread_button = threading.Thread(target=push_button)
 thread_main.setDaemon(True)
@@ -115,4 +116,4 @@ thread_human.start()
 thread_button.start()
 
 while True:
-  pass
+    pass
