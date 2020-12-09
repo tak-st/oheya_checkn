@@ -1,6 +1,6 @@
 #coding:utf-8
 from uuid import getnode as get_mac
-#from lcddisplay import jlcd
+from lcddisplay import jlcd
 import random
 import math
 import sqlite3
@@ -9,7 +9,7 @@ import connect_database as db
 import MySQLdb
 import pymysql
 
-class first_setup:
+class FirstSetup:
     def __init__(self):
         #MACアドレスをランダムなシード値で再作成
         random.seed(get_mac())
@@ -112,11 +112,10 @@ class first_setup:
         if device_id == self.mac:
             lcd.message("Authentication", 1)
             lcd.msssage("successful", 2)
+
             return True
         else:
             self.lcd.message("Authentication", 1)
             self.lcd.msssage("failed", 2)
-            return False
 
-Setup = first_setup()
-Setup.create_database()
+            return False
