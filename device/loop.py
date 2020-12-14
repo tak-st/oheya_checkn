@@ -5,7 +5,6 @@ import wiringpi
 import MySQLdb
 import datetime
 import connect_database as db
-import pymysql
 from device.co2 import getco2 as co2
 from device.gps import getgps as gps
 from device.humansensor import humansensor as human
