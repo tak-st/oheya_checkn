@@ -20,6 +20,12 @@ class MeasureClass:
     elif "latitude" in self.measure_data:
       lcd.message("イド : " + str(self.measure_data["latitude"]), 1)
       lcd.message("ケイド : " + str(self.measure_data["longitude"]), 2)
+    elif "Dust" in self.measure_data:
+      lcd.message("ホコリ : " + str(self.measure_data["dust"]), 1)
+      lcd.message("", 2)
+    elif "Gas" in self.measure_data:
+      lcd.message("ガス : " + str(self.measure_data["gas"]), 1)
+      lcd.message("", 2)
 
   def data_post_db(self):
     local = op.OperateLocalDatabase()
