@@ -13,3 +13,5 @@
 [![codeSize](https://img.shields.io/github/languages/code-size/tak-st/oheya_checkn)](https://github.com/tak-st/oheya_checkn/find/develop)
 [![repoSize](https://img.shields.io/github/repo-size/tak-st/oheya_checkn)](https://github.com/tak-st/oheya_checkn/find/develop)
 [![GitHub](https://img.shields.io/github/license/tak-st/oheya_checkn)](https://github.com/tak-st/oheya_checkn/blob/develop/LICENSE)
+<br><br>
+### 某ウイルスの影響で家にいることが増えた昨今、ついつい換気を怠ってしまいませんか？<br><br>部屋の環境が悪いと身体に様々な影響が出てきますね。<br><br>そんな問題を解決すべく試行錯誤した結果…<br><br>小型コンピューターと様々なセンサーを繫げ、部屋の環境が一目でわかるようにしました！！<br><br>お手元の端末や、接続されているディスプレイでいつでも部屋の環境の詳細を確認でき、<br><br>さらに数値が基準値を超えると、換気を促す通知を送信します。<br><br>部屋の環境をキレイに保つため、是非ご活用ください。
