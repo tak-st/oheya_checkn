@@ -117,7 +117,7 @@ class FirstSetup:
             self.lcd.message("Authentication", 1)
             self.lcd.msssage("failed", 2)
 
-            return False
+        return False
 
 class SetUp:
     def __init__(self):
@@ -146,4 +146,4 @@ class SetUp:
             self.lcd.message("connection", 1)
             self.lcd.msssage("failed", 2)
 
-            return False
+        return False
