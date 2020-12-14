@@ -1,11 +1,11 @@
 import threading
 import time
 import wiringpi
-from co2 import getco2 as co2
-from gps import getgps as gps
-from humansensor import humansensor as human
-from lcddisplay import jlcd as lcd
-from temperature import temperature as temp
+
+from device.co2 import getco2 as co2
+from device.gps import getgps as gps
+from device.humansensor import humansensor as human
+from device.temperature import temperature as temp
 
 # ボタンを繋いだGPIOの識別番号
 button_pin1 = 18
@@ -24,11 +24,8 @@ wiringpi.pinMode(button_pin2, 0)
 wiringpi.pullUpDnControl(button_pin1, 2)
 wiringpi.pullUpDnControl(button_pin2, 2)
 
-lcd = jlcd.Jlcd(2, 0x27, True)
-
 device_id = 1111
 
-# lcdの切り替え用
 cnt = 0
 
 
