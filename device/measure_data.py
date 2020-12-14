@@ -1,5 +1,5 @@
 from lcddisplay import jlcd
-import connect_database as db
+import operate_database as op
 import MySQLdb
 import pymysql
 
@@ -23,30 +23,22 @@ class MeasureClass:
       lcd.message("ケイド : " + str(self.measure_data["longitude"]), 2)
 
   def data_post_db(self):
-    pymysql.install_as_MySQLdb()
-    connection = db.connect_air_database()
-    cursor = connection.cursor()
+    local = op.OperateLocalDatabase()
+    remote = op.OperateRemoteDatabase()
     time = datetime.datetime.now()
 
     if "temp" in self.measure_data:
-      cur.execute("INSERT INTO device_data VALUES('" + str(1) + "','" + "temperature"
-                  + "','" + str(time) + "','" + str(self.measure_data["temp"]) + "')")
-      cur.execute("INSERT INTO device_data VALUES('" + str(1) + "','" + "humidity"
-                  + "','" + str(time) + "','" + str(self.measure_data["humidity"]) + "')")
-    elif "co2" in self.measure_data:
-      cur.execute("INSERT INTO device_data VALUES('" + str(1) + "','" + "co2"
-                  + "','" + str(time) + "','" + str(self.measure_data["co2"]) + "')")
+      local.insert_data(self.device_id, 0, str(self.measure_data["temp"]), str(time))
+      local.insert_data(self.device_id, 1, str(self.measure_data["humidity"]), str(time))
     elif "latitude" in self.measure_data:
-      cur.execute("INSERT INTO device_data VALUES('" + str(1) + "','" + "latitude"
-                  + "','" + str(time) + "','" + str(self.measure_data["latitude"]) + "')")
-      cur.execute("INSERT INTO device_data VALUES('" + str(1) + "','" + "longitude"
-                  + "','" + str(time) + "','" + str(self.measure_data["longitude"]) + "')")
-
-    except MySQLdb.Error as e:
-      print(e)
-
-    connection.commit()
-    connection.close()
+      local.insert_data(self.device_id, 2, str(self.measure_data["latitude"]), str(time))
+      local.insert_data(self.device_id, 3, str(self.measure_data["longitude"]), str(time))
+    elif "co2" in self.measure_data:
+      local.insert_data(self.device_id, 4, str(self.measure_data["co2"]), str(time))
+    elif "Dust" in self.measure_data:
+      local.insert_data(self.device_id, 5, str(self.measure_data["dust"]), str(time))
+    elif "Gas" in self.measure_data:
+      local.insert_data(self.device_id, 6, str(self.measure_data["gas"]), str(time))
 
   def data_print(self):
     print(str(self.measure_data))
