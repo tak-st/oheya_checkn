@@ -60,6 +60,7 @@ web/public/.htaccess
 web/public/sitemap*
 # テーマフォルダと wp-config.php のみにする
 web/public/*
+!web/public/.idea
 !web/public/wp-config.php
 !web/public/wp-content
 web/public/wp-content/*
