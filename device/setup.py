@@ -103,8 +103,7 @@ class FirstSetup:
         device_id = 0
         try:
             with connection.cursor() as cursor:
-                sql = f'''SELECT device_id FROM device WHERE device_id = {self.mac}'''
-                cursor.execute(sql)
+                cursor.execute("SELECT device_id FROM device WHERE device_id = %s", self.mac)
                 device_id = cursor.rowcount
         finally:
             connection.close()
@@ -133,8 +132,7 @@ class SetUp:
         device_id = 0
         try:
             with connection.cursor() as cursor:
-                sql = f'''SELECT device_id FROM device WHERE device_id = {self.mac}'''
-                cursor.execute(sql)
+                cursor.execute("SELECT device_id FROM device WHERE device_id = %s", self.mac)
                 device_id = cursor.rowcount
         finally:
             connection.close()
