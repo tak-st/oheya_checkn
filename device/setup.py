@@ -113,9 +113,9 @@ class FirstSetup:
             lcd.msssage("successful", 2)
 
             return True
-        else:
-            self.lcd.message("Authentication", 1)
-            self.lcd.msssage("failed", 2)
+
+        self.lcd.message("Authentication", 1)
+        self.lcd.msssage("failed", 2)
 
         return False
 
@@ -142,8 +142,8 @@ class SetUp:
             lcd.msssage("successful", 2)
 
             return True
-        else:
-            self.lcd.message("connection", 1)
-            self.lcd.msssage("failed", 2)
+
+        self.lcd.message("connection", 1)
+        self.lcd.msssage("failed", 2)
 
         return False
