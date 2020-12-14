@@ -54,3 +54,15 @@ Temporary Items
 
 # データベース接続情報を保存しているファイルです。
 device/connect_database.py
+
+# WordPressによって書き換わる場合があるため除外
+web/public/.htaccess
+web/public/sitemap*
+# テーマフォルダと wp-config.php のみにする
+web/public/*
+!web/public/wp-config.php
+!web/public/wp-content
+web/public/wp-content/*
+!web/public/wp-content/themes
+web/public/wp-content/themes/*
+!web/public/wp-content/themes/customizetheme
