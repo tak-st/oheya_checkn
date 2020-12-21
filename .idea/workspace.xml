@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4b66e66-40a5-4fd2-b55b-8d6ee63ac0bc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/oheya_checkn.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/oheya_checkn.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/device/loop.py" beforeDir="false" afterPath="$PROJECT_DIR$/device/loop.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/device/operate_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/device/operate_database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/device/temperature/temperature.py" beforeDir="false" afterPath="$PROJECT_DIR$/device/temperature/temperature.py" afterDir="false" />
-    </list>
+    <list default="true" id="a4b66e66-40a5-4fd2-b55b-8d6ee63ac0bc" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="true" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

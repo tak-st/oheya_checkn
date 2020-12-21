@@ -131,11 +131,11 @@ def lcd_display():
             cnt = 0
 
         if cnt == 0:
-            Temperature.data_display()
             soundEffect(1)
+            Temperature.data_display()
         elif cnt == 1:
-            Gps.data_display()
             soundEffect(2)
+            Gps.data_display()
         else:
-            Co2.data_display()
             soundEffect(3)
+            Co2.data_display()
