@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4b66e66-40a5-4fd2-b55b-8d6ee63ac0bc" name="Default Changelist" comment="" />
+    <list default="true" id="a4b66e66-40a5-4fd2-b55b-8d6ee63ac0bc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/oheya_checkn.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/oheya_checkn.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/device/loop.py" beforeDir="false" afterPath="$PROJECT_DIR$/device/loop.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/device/operate_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/device/operate_database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/device/temperature/temperature.py" beforeDir="false" afterPath="$PROJECT_DIR$/device/temperature/temperature.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="true" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,7 +33,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a57d5f20-7273-44d3-95a7-d6b3dd41c054" name="Default Changelist" comment="" />
+      <changelist id="a4b66e66-40a5-4fd2-b55b-8d6ee63ac0bc" name="Default Changelist" comment="" />
       <created>1607604742424</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -47,6 +57,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="コードのエラーを対処し自動フォーマットにより整理しました。" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="721" y="222" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608526881989">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="721" y="222" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1608526881989" />
     <state x="473" y="135" key="CommitChangelistDialog2" timestamp="1607664385576">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -55,9 +69,9 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="618" y="269" key="RollbackChangesDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1607604954050" />
-    <state x="411" y="251" key="SettingsEditor" timestamp="1607663466124">
+    <state x="582" y="274" key="SettingsEditor" timestamp="1608526892662">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="411" y="251" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1607663466124" />
+    <state x="582" y="274" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1608526892662" />
   </component>
 </project>

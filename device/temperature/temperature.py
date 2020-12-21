@@ -6,7 +6,7 @@ import subprocess
 
 def get_temperature():
 
-    dhtDevice = adafruit_dht.DHT22(board.D4)_
+    dhtDevice = adafruit_dht.DHT22(board.D4)
 
     try:
         # Print the values to the serial port

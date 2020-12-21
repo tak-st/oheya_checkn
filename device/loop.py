@@ -5,6 +5,8 @@ import wiringpi
 import MySQLdb
 import datetime
 import connect_database as db
+from pydub import AudioSegment
+from pydub.playback import play
 from device.co2 import getco2 as co2
 from device.gps import getgps as gps
 from device.humansensor import humansensor as human
@@ -27,6 +29,51 @@ def get_data():
     temp_data = temp.get_temperature()
     gps_data = gps.get_gps()
     co2_data = co2.get_co2()
+
+
+def soundEffect(num):
+    # button_pin =
+
+    # GPIO初期化
+    wiringpi.wiringPiSetupGpio()
+
+    # GPIOを出力モード(1)に設定
+    wiringpi.pinMode(button_pin, 0)
+
+    # 端子に何も接続されていない場合の状態を設定
+    # 3.3Vの場合には「2」（プルアップ）
+    # 0Vの場合は「1」と設定する（プルダウン）
+    wiringpi.pullUpDnControl(button_pin, 2)
+
+    flg = False
+    state = 0
+    lcd = LCD(2, 0x027, True)
+
+    while True:
+        if wiringpi.digitalRead(button_pin) == 0:
+            if flg is False:
+                if state == 0:
+                    lcd.message("オンセイ:ON", 1)
+                    time.sleep(2)
+                    state = 1
+                else:
+                    lcd.message("オンセイ:OFF", 1)
+                    time.sleep(2)
+                    state = 0
+                flg = True
+        else:
+            flg = False
+
+        if state == 1:
+            if num == 1:
+                sound = AudioSegment.from_mp3("gs-16b-2c-44100hz.mp3")
+                play(sound)
+            elif num == 2:
+                sound = AudioSegment.from_mp3("gs-16b-2c-44100hz.mp3")
+                play(sound)
+            elif num == 3:
+                sound = AudioSegment.from_mp3("gs-16b-2c-44100hz.mp3")
+                play(sound)
 
 
 def lcd_display():
@@ -85,7 +132,10 @@ def lcd_display():
 
         if cnt == 0:
             Temperature.data_display()
+            soundEffect(1)
         elif cnt == 1:
             Gps.data_display()
+            soundEffect(2)
         else:
             Co2.data_display()
+            soundEffect(3)
