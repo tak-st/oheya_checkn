@@ -33,14 +33,14 @@ class OperateLocalDatabase:
     finally:
       connection.close()
 
-  def select_maxtime(self, device_id):
+  def comparison_time(self, time):
     connection = sqlite3.connect(self.DATABASE)
     try:
       with connection.cursor() as cursor:
-        cursor.execute("SELECT MAX(time) FROM device_data WHERE %s GROUP BY device_id", device_id)
-        maxtime = cursor.fetchone()
+        cursor.execute("SELECT * FROM device_data WHERE time > %s", time)
+        data = cursor.fetchall()
 
-        return maxtime
+        return data
     except sqlite3.Error as e:
       print(e)
     finally:
