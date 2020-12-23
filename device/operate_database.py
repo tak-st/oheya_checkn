@@ -73,13 +73,13 @@ class OperateRemoteDatabase:
       connection.close()
 
     def select_maxtime(self, device_id):
-    try:
-      with self.connection.cursor() as cursor:
-        cursor.execute("SELECT MAX(time) FROM device_data WHERE %s GROUP BY device_id", device_id)
-        maxtime = cursor.fetchone()
+      try:
+        with self.connection.cursor() as cursor:
+          cursor.execute("SELECT MAX(time) FROM device_data WHERE %s GROUP BY device_id", device_id)
+          maxtime = cursor.fetchone()
 
-        return maxtime
-    except pymysql.Error as e:
-      print(e)
-    finally:
-      connection.close()
+          return maxtime
+      except pymysql.Error as e:
+        print(e)
+      finally:
+        connection.close()
