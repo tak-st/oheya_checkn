@@ -2,7 +2,7 @@ from lcddisplay import jlcd
 import operate_database as op
 import setup
 
-class MeasureClass:
+class MeasureData:
 
   def __init__(self, data, device_id):
     self.measure_data = data
@@ -20,10 +20,10 @@ class MeasureClass:
     elif "latitude" in self.measure_data:
       lcd.message("イド : " + str(self.measure_data["latitude"]), 1)
       lcd.message("ケイド : " + str(self.measure_data["longitude"]), 2)
-    elif "Dust" in self.measure_data:
+    elif "dust" in self.measure_data:
       lcd.message("ホコリ : " + str(self.measure_data["dust"]), 1)
       lcd.message("", 2)
-    elif "Gas" in self.measure_data:
+    elif "gas" in self.measure_data:
       lcd.message("ガス : " + str(self.measure_data["gas"]), 1)
       lcd.message("", 2)
 
@@ -52,12 +52,12 @@ class MeasureClass:
       if setup.check_device_id():
         remote.insert_data(self.device_id, 4, str(self.measure_data["co2"]), str(time))
 
-    elif "Dust" in self.measure_data:
+    elif "dust" in self.measure_data:
       local.insert_data(self.device_id, 5, str(self.measure_data["dust"]), str(time))
       if setup.check_device_id():
         remote.insert_data(self.device_id, 5, str(self.measure_data["dust"]), str(time))
 
-    elif "Gas" in self.measure_data:
+    elif "gas" in self.measure_data:
       local.insert_data(self.device_id, 6, str(self.measure_data["gas"]), str(time))
       if setup.check_device_id():
         remote.insert_data(self.device_id, 6, str(self.measure_data["gas"]), str(time))
