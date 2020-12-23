@@ -1,23 +1,23 @@
-import threading
 import time
-import pymysql
-import wiringpi
-import MySQLdb
-import datetime
 import connect_database as db
+import measure_data as data
 from pydub import AudioSegment
 from pydub.playback import play
 from device.co2 import getco2 as co2
 from device.gps import getgps as gps
-from device.humansensor import humansensor as human
+from device.gas import gas
 from device.temperature import temperature as temp
 
-device_id = 1111
+#セットアップのインスタンス生成
+first_setup = setup.FirstSetup()
+#デバイスIDの取得
+device_id = first_setup.get_device_id()
 
 # 各センサーのデータ取得
 temp_data = 0
 gps_data = 0
 co2_data = 0
+gas_data = 0
 
 
 def get_data():
@@ -25,14 +25,56 @@ def get_data():
     global temp_data
     global gps_data
     global co2_data
+    global gas_data
 
     temp_data = temp.get_temperature()
     gps_data = gps.get_gps()
     co2_data = co2.get_co2()
+    gas_data = gas.get_gas()
+    time.sleep(30)
+
+def post_db():
+    # グローバル変数
+    global temp_data
+    global gps_data
+    global co2_data
+    global gas_data
+
+    #データクラスの初期化
+    temp_data_class = data.MeasureData(temp_data, device_id)
+    gps_data_class = data.MeasureData(gps_data, device_id)
+    co2_data_class = data.MeasureData(co2_data, device_id)
+    gas_data_class = data.MeasureData(gas_data, device_id)
+
+    temp_data_class.data_post_db()
+    gps_data_class.data_post_db()
+    co2_data_class.data_post_db()
+    gas_data_class.data_post_db()
+
+    time.sleep(30)
+
+def print_data():
+    # グローバル変数
+    global temp_data
+    global gps_data
+    global co2_data
+    global gas_data
+
+    #データクラスの初期化
+    temp_data_class = data.MeasureData(temp_data, device_id)
+    gps_data_class = data.MeasureData(gps_data, device_id)
+    co2_data_class = data.MeasureData(co2_data, device_id)
+    gas_data_class = data.MeasureData(gas_data, device_id)
+
+    temp_data_class.data_print()
+    gps_data_class.data_print()
+    co2_data_class.data_print()
+    gas_data_class.data_print()
+
+    time.sleep(10)
 
 
 def soundEffect(num):
-    # button_pin =
 
     # GPIO初期化
     wiringpi.wiringPiSetupGpio()
@@ -77,9 +119,17 @@ def soundEffect(num):
 
 
 def lcd_display():
-    Temperature = mesdata.MeasureClass(temp_data, device_id)
-    Gps = mesdata.MeasureClass(gps_data, device_id)
-    Co2 = mesdata.MeasureClass(co2_data, device_id)
+    # グローバル変数
+    global temp_data
+    global gps_data
+    global co2_data
+    global gas_data
+
+    #データクラスの初期化
+    temp_data_class = data.MeasureData(temp_data, device_id)
+    gps_data_class = data.MeasureData(gps_data, device_id)
+    co2_data_class = data.MeasureData(co2_data, device_id)
+    gas_data_class = data.MeasureData(gas_data, device_id)
 
     # ボタンを繋いだGPIOの識別番号
     button_pin1 = 18
@@ -132,10 +182,10 @@ def lcd_display():
 
         if cnt == 0:
             soundEffect(1)
-            Temperature.data_display()
+            temp_data_class.data_display()
         elif cnt == 1:
             soundEffect(2)
-            Gps.data_display()
+            gps_data_class.data_display()
         else:
             soundEffect(3)
-            Co2.data_display()
+            gas_data_class.data_display()

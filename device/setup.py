@@ -17,9 +17,11 @@ class FirstSetup:
         pymysql.install_as_MySQLdb()
         self.lcd = jlcd.Jlcd(2,0x27,True)
 
+    def get_device_id(self):
+        return self.mac
+
     def id_display(self):
         #LCDに表示
-
         self.lcd.message("Please input ID", 1)
         self.lcd.message(str(self.mac),2)
 
@@ -100,7 +102,7 @@ class FirstSetup:
 
     def check_device_id(self):
         connection = db.connect_air_database()
-        device_id = 0
+        device_id = self.mac
         try:
             with connection.cursor() as cursor:
                 cursor.execute("SELECT device_id FROM device WHERE device_id = %s", self.mac)
