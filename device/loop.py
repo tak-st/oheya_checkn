@@ -195,6 +195,7 @@ def lcd_display():
     # チャタリング対策用
     flg1 = False
     flg2 = False
+    flg3 = False
     cnt = 0
 
     while True:
@@ -221,7 +222,8 @@ def lcd_display():
             flg2 = False
 
         if wiringpi.digitalRead(button_pin3) == 0:
-            menu_button()
+            if flg3 is False:
+                menu_button()
 
         if cnt == 3:
             cnt = 0
