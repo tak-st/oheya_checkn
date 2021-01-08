@@ -1,12 +1,13 @@
 import time
 import connect_database as db
 import measure_data as data
+import setup
 from pydub import AudioSegment
 from pydub.playback import play
-from device.co2 import getco2 as co2
-from device.gps import getgps as gps
-from device.gas import gas
-from device.temperature import temperature as temp
+from co2 import mh_z19 as co2
+from gps import getgps as gps
+from gas import gas
+from temperature import temperature as temp
 
 #セットアップのインスタンス生成
 first_setup = setup.FirstSetup()
@@ -14,44 +15,48 @@ first_setup = setup.FirstSetup()
 device_id = first_setup.get_device_id()
 
 # 各センサーのデータ取得
-temp_data = 0
-gps_data = 0
-co2_data = 0
-gas_data = 0
+temp_data = {"temp": 0, "humidity": 0}
+gps_data = {"latitude": 0, "longitude": 0}
+co2_data = {"co2": 0}
+gas_data = {"gas": 0}
 
 
 def get_data():
+    
     # グローバル変数
     global temp_data
     global gps_data
     global co2_data
     global gas_data
-
-    temp_data = temp.get_temperature()
-    gps_data = gps.get_gps()
-    co2_data = co2.get_co2()
-    gas_data = gas.get_gas()
-    time.sleep(30)
+    
+    while True:
+        temp_data = temp.get_temperature()
+        gps_data = gps.get_gps()
+        co2_data = co2.read_all()
+        gas_data = gas.get_gas()
+        time.sleep(5)
 
 def post_db():
+    
     # グローバル変数
     global temp_data
     global gps_data
     global co2_data
     global gas_data
+    
+    while True:
+        #データクラスの初期化
+        temp_data_class = data.MeasureData(temp_data, device_id)
+        gps_data_class = data.MeasureData(gps_data, device_id)
+        co2_data_class = data.MeasureData(co2_data, device_id)
+        gas_data_class = data.MeasureData(gas_data, device_id)
 
-    #データクラスの初期化
-    temp_data_class = data.MeasureData(temp_data, device_id)
-    gps_data_class = data.MeasureData(gps_data, device_id)
-    co2_data_class = data.MeasureData(co2_data, device_id)
-    gas_data_class = data.MeasureData(gas_data, device_id)
+        temp_data_class.data_post_db()
+        gps_data_class.data_post_db()
+        co2_data_class.data_post_db()
+        gas_data_class.data_post_db()
 
-    temp_data_class.data_post_db()
-    gps_data_class.data_post_db()
-    co2_data_class.data_post_db()
-    gas_data_class.data_post_db()
-
-    time.sleep(30)
+        time.sleep(10)
 
 def print_data():
     # グローバル変数
@@ -59,19 +64,21 @@ def print_data():
     global gps_data
     global co2_data
     global gas_data
+    
+    while True:
+        
+        #データクラスの初期化
+        temp_data_class = data.MeasureData(temp_data, device_id)
+        gps_data_class = data.MeasureData(gps_data, device_id)
+        co2_data_class = data.MeasureData(co2_data, device_id)
+        gas_data_class = data.MeasureData(gas_data, device_id)
 
-    #データクラスの初期化
-    temp_data_class = data.MeasureData(temp_data, device_id)
-    gps_data_class = data.MeasureData(gps_data, device_id)
-    co2_data_class = data.MeasureData(co2_data, device_id)
-    gas_data_class = data.MeasureData(gas_data, device_id)
+        temp_data_class.data_print()
+        gps_data_class.data_print()
+        co2_data_class.data_print()
+        gas_data_class.data_print()
 
-    temp_data_class.data_print()
-    gps_data_class.data_print()
-    co2_data_class.data_print()
-    gas_data_class.data_print()
-
-    time.sleep(10)
+        time.sleep(10)
 
 
 def soundEffect(num):

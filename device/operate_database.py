@@ -1,7 +1,6 @@
 #coding:utf-8
 import sqlite3
 import connect_database as db
-import MySQLdb
 import pymysql
 
 class OperateLocalDatabase:
@@ -11,9 +10,10 @@ class OperateLocalDatabase:
 
   def select_data(self, sensor_id):
     connection = sqlite3.connect(self.DATABASE)
+    cursor = connection.cursor()
+    
     try:
-      with connection.cursor() as cursor:
-        cursor.execute("SELECT * FROM device_data WHERE %s", sensor_id)
+        cursor.execute("SELECT * FROM device_data WHERE %s" % (sensor_id))
         device_data = cursor.fetchall()
 
         return device_data
@@ -24,10 +24,11 @@ class OperateLocalDatabase:
 
   def insert_data(self, device_id, sensor_id, sensor_data, time):
     connection = sqlite3.connect(self.DATABASE)
+    cursor = connection.cursor()
+    
     try:
-      with connection.cursor() as cursor:
-        cursor.execute("INSERT INTO device_data VALUES(%s, %d, %s, %s)", device_id, sensor_id, sensor_data, time)
-        conn.commit()
+        cursor.execute("INSERT INTO device_data VALUES (?, ?, ?, ?)", (device_id, sensor_id, sensor_data, time))
+        connection.commit()
     except sqlite3.Error as e:
       print(e)
     finally:
@@ -35,8 +36,9 @@ class OperateLocalDatabase:
 
   def comparison_time(self, time):
     connection = sqlite3.connect(self.DATABASE)
+    cursor = connection.cursor()
+    
     try:
-      with connection.cursor() as cursor:
         cursor.execute("SELECT * FROM device_data WHERE time > %s", time)
         data = cursor.fetchall()
 
@@ -51,8 +53,9 @@ class OperateRemoteDatabase:
     self.connection = db.connect_air_database()
 
   def select_data(self, sensor_id):
+    cursor = self.connection.cursor()
+    
     try:
-      with self.connection.cursor() as cursor:
         cursor.execute("SELECT * FROM device_data WHERE %s", sensor_id)
         device_data = cursor.fetchall()
 
@@ -63,23 +66,23 @@ class OperateRemoteDatabase:
       connection.close()
 
   def insert_data(self, device_id, sensor_id, sensor_data, time):
+    cursor = self.connection.cursor()
     try:
-      with self.connection.cursor() as cursor:
-        cursor.execute("INSERT INTO device_data VALUES(%s, %d, %s, %s)", device_id, sensor_id, sensor_data, time)
+        cursor.execute("INSERT INTO device_data VALUES(%s, %d, %s, %s)", (device_id, sensor_id, sensor_data, time))
         conn.commit()
     except pymysql.Error as e:
       print(e)
     finally:
       connection.close()
 
-    def select_maxtime(self, device_id):
-      try:
-        with self.connection.cursor() as cursor:
-          cursor.execute("SELECT MAX(time) FROM device_data WHERE %s GROUP BY device_id", device_id)
-          maxtime = cursor.fetchone()
-
-          return maxtime
-      except pymysql.Error as e:
+  def select_maxtime(self, device_id):
+    cursor = self.connection.cursor()
+    try:
+        cursor.execute("SELECT MAX(time) FROM device_data WHERE %s GROUP BY device_id", device_id)
+        maxtime = cursor.fetchone()
+        
+        return maxtime
+    except pymysql.Error as e:
         print(e)
-      finally:
+    finally:
         connection.close()

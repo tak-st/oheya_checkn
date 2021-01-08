@@ -6,7 +6,6 @@ import math
 import sqlite3
 import subprocess
 import connect_database as db
-import MySQLdb
 import pymysql
 
 class FirstSetup:

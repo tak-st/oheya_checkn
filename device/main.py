@@ -3,17 +3,24 @@ import time
 import wiringpi
 import setup
 import loop
+import os
+from humansensor import humansensor as human
+
+"""
 from device.co2 import getco2 as co2
 from device.gps import getgps as gps
-from device.humansensor import humansensor as human
 from device.temperature import temperature as temp
+"""
 
 #セットアップのインスタンス生成
 first_setup = setup.FirstSetup()
 #デバイスIDの取得
 device_id = first_setup.get_device_id()
 #ローカーデータベースの生成
-first_setup.create_database()
+if os.path.isfile("my_air_data.db"):
+    print("DB is exist")
+else:
+    first_setup.create_database()
 
 """
 def main_loop():
@@ -54,15 +61,18 @@ def main_loop():
             break
 """
 
-thread_human = threading.Thread(target=human.get_human)
+#thread_human = threading.Thread(target=human.get_human)
 thread_get_data = threading.Thread(target=loop.get_data)
 thread_print_data = threading.Thread(target=loop.print_data)
-thread_human.setDaemon(True)
+thread_post_db = threading.Thread(target=loop.post_db)
+#thread_human.setDaemon(True)
 thread_get_data.setDaemon(True)
 thread_print_data.setDaemon(True)
-thread_human.start()
+thread_post_db.setDaemon(True)
+#thread_human.start()
 thread_get_data.start()
 thread_print_data.start()
+thread_post_db.start()
 
 while True:
     pass
