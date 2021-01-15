@@ -1,38 +1,94 @@
-import threading
 import time
-import pymysql
-import wiringpi
-import MySQLdb
-import datetime
 import connect_database as db
+import measure_data as data
+import setup
 from pydub import AudioSegment
 from pydub.playback import play
-from device.co2 import getco2 as co2
-from device.gps import getgps as gps
-from device.humansensor import humansensor as human
-from device.temperature import temperature as temp
-
-device_id = 1111
-
-# 各センサーのデータ取得
-temp_data = 0
-gps_data = 0
-co2_data = 0
+from co2 import mh_z19 as co2
+from gps import getgps as gps
+from gas import gas
+from temperature import temperature as temp
 
 
-def get_data():
-    # グローバル変数
-    global temp_data
-    global gps_data
-    global co2_data
+class Loop:
+    
+    def __init__(self):
+        
+        #セットアップのインスタンス生成
+        first_setup = setup.FirstSetup()
+        #デバイスIDの取得
+        self.device_id = first_setup.get_device_id()
 
-    temp_data = temp.get_temperature()
-    gps_data = gps.get_gps()
-    co2_data = co2.get_co2()
+        #各センサーのデータ取得
+        self.temp_data = {"temp": 0, "humidity": 0}
+        self.gps_data = {"latitude": 0, "longitude": 0}
+        self.co2_data = {"co2": 0}
+        self.gas_data = {"gas": 0}
 
 
+    def get_data(self):
+        
+        while True:
+            self.temp_data = temp.get_temperature()
+            self.gps_data = gps.get_gps()
+            self.co2_data = co2.read_all()
+            self.gas_data = gas.get_gas()
+            time.sleep(5)
+
+    def post_db(self):
+        
+        while True:
+            
+            #0はやエラーは送信しない
+            if isinstance(self.temp_data, dict) and 0 not in self.temp_data.values():
+                temp_data_class = data.MeasureData(self.temp_data, self.device_id)
+                temp_data_class.data_post_db()
+            
+            if isinstance(self.gps_data, dict) and 0 not in self.gps_data.values():
+                gps_data_class = data.MeasureData(self.gps_data, self.device_id)
+                gps_data_class.data_post_db()
+            
+            if isinstance(self.co2_data, dict) and self.co2_data["co2"] != 0:
+                co2_data_class = data.MeasureData(self.co2_data, self.device_id)
+                co2_data_class.data_post_db()
+                
+            if isinstance(self.gas_data, dict) and 0 not in self.gas_data.values():
+                gas_data_class = data.MeasureData(self.gas_data, self.device_id)
+                gas_data_class.data_post_db()
+
+            time.sleep(10)
+
+    def print_data(self):
+        
+        while True:
+            #０やエラーは表示しない
+            #ボタンで表示切り替え
+            if isinstance(self.temp_data, dict) and 0 not in self.temp_data.values():
+                temp_data_class = data.MeasureData(self.temp_data, self.device_id)
+                temp_data_class.data_print()
+                temp_data_class.data_display()
+                time.sleep(3)
+                
+            if isinstance(self.gps_data, dict) and 0 not in self.gps_data.values():
+                gps_data_class = data.MeasureData(self.gps_data, self.device_id)
+                gps_data_class.data_print()
+                gps_data_class.data_display()
+                time.sleep(3)
+                
+            if isinstance(self.co2_data, dict) and self.co2_data["co2"] != 0:
+                co2_data_class = data.MeasureData(self.co2_data, self.device_id)
+                co2_data_class.data_print()
+                co2_data_class.data_display()
+                time.sleep(3)
+                
+            if isinstance(self.gas_data, dict) and 0 not in self.gas_data.values():
+                gas_data_class = data.MeasureData(self.gas_data, self.device_id)
+                gas_data_class.data_print()
+                gas_data_class.data_display()
+                time.sleep(3)
+
+"""
 def soundEffect(num):
-    # button_pin =
 
     # GPIO初期化
     wiringpi.wiringPiSetupGpio()
@@ -77,9 +133,17 @@ def soundEffect(num):
 
 
 def lcd_display():
-    Temperature = mesdata.MeasureClass(temp_data, device_id)
-    Gps = mesdata.MeasureClass(gps_data, device_id)
-    Co2 = mesdata.MeasureClass(co2_data, device_id)
+    # グローバル変数
+    global temp_data
+    global gps_data
+    global co2_data
+    global gas_data
+
+    #データクラスの初期化
+    temp_data_class = data.MeasureData(temp_data, device_id)
+    gps_data_class = data.MeasureData(gps_data, device_id)
+    co2_data_class = data.MeasureData(co2_data, device_id)
+    gas_data_class = data.MeasureData(gas_data, device_id)
 
     # ボタンを繋いだGPIOの識別番号
     button_pin1 = 18
@@ -132,10 +196,11 @@ def lcd_display():
 
         if cnt == 0:
             soundEffect(1)
-            Temperature.data_display()
+            temp_data_class.data_display()
         elif cnt == 1:
             soundEffect(2)
-            Gps.data_display()
+            gps_data_class.data_display()
         else:
             soundEffect(3)
-            Co2.data_display()
+            gas_data_class.data_display()
+"""
