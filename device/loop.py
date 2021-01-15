@@ -5,6 +5,7 @@ import wiringpi
 import MySQLdb
 import datetime
 import connect_database as db
+import simpleaudio as sa
 from pydub import AudioSegment
 from pydub.playback import play
 from device.co2 import getco2 as co2
@@ -66,14 +67,17 @@ def soundEffect(num):
 
         if state == 1:
             if num == 1:
-                sound = AudioSegment.from_mp3("gs-16b-2c-44100hz.mp3")
-                play(sound)
+                wav1 = sa.WaveObject.from_wace_file("ルート指定")
+                play = wav1.play()
+                play.done()
             elif num == 2:
-                sound = AudioSegment.from_mp3("gs-16b-2c-44100hz.mp3")
-                play(sound)
+                wav2 = sa.WaveObject.from_wace_file("ルート指定")
+                play = wav2.play()
+                play.done()
             elif num == 3:
-                sound = AudioSegment.from_mp3("gs-16b-2c-44100hz.mp3")
-                play(sound)
+                wav3 = sa.WaveObject.from_wace_file("ルート指定")
+                play = wav3.play()
+                play.done()
 
 
 def lcd_display():

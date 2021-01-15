@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4b66e66-40a5-4fd2-b55b-8d6ee63ac0bc" name="Default Changelist" comment="" />
+    <list default="true" id="a4b66e66-40a5-4fd2-b55b-8d6ee63ac0bc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/device/loop.py" beforeDir="false" afterPath="$PROJECT_DIR$/device/loop.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="true" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,10 +61,11 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="473" y="135" key="CommitChangelistDialog2/0.0.1792.1120@0.0.1792.1120" timestamp="1607664385576" />
-    <state x="618" y="269" key="RollbackChangesDialog" timestamp="1607604954050">
-      <screen x="0" y="0" width="1792" height="1120" />
+    <state x="618" y="286" key="RollbackChangesDialog" timestamp="1610694697952">
+      <screen x="0" y="23" width="1792" height="1097" />
     </state>
     <state x="618" y="269" key="RollbackChangesDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1607604954050" />
+    <state x="618" y="286" key="RollbackChangesDialog/0.23.1792.1097@0.23.1792.1097" timestamp="1610694697952" />
     <state x="582" y="274" key="SettingsEditor" timestamp="1608526892662">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
