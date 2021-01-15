@@ -19,10 +19,13 @@ if os.path.isfile("my_air_data.db"):
 else:
     first_setup.create_database()
 
+#loopクラスのインスタンス生成
+Loop = loop.Loop()
+
 thread_human = threading.Thread(target=human.get_human)
-thread_get_data = threading.Thread(target=loop.get_data)
-thread_print_data = threading.Thread(target=loop.print_data)
-thread_post_db = threading.Thread(target=loop.post_db)
+thread_get_data = threading.Thread(target=Loop.get_data)
+thread_print_data = threading.Thread(target=Loop.print_data)
+thread_post_db = threading.Thread(target=Loop.post_db)
 thread_human.setDaemon(True)
 thread_get_data.setDaemon(True)
 thread_print_data.setDaemon(True)
