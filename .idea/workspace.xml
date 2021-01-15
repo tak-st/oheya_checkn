@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4b66e66-40a5-4fd2-b55b-8d6ee63ac0bc" name="Default Changelist" comment="" />
+    <list default="true" id="a4b66e66-40a5-4fd2-b55b-8d6ee63ac0bc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="true" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,7 +41,21 @@
       <option name="project" value="LOCAL" />
       <updated>1607664385806</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="動くか定かでは無いけどメニュー処理を作りました。">
+      <created>1610091333381</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1610091333381</updated>
+    </task>
+    <task id="LOCAL-00003" summary="チャタリング処理を追記">
+      <created>1610091627751</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1610091627751</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -47,17 +63,20 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="コードのエラーを対処し自動フォーマットにより整理しました。" />
-    <option name="LAST_COMMIT_MESSAGE" value="コードのエラーを対処し自動フォーマットにより整理しました。" />
+    <MESSAGE value="動くか定かでは無いけどメニュー処理を作りました。" />
+    <MESSAGE value="チャタリング処理を追記" />
+    <option name="LAST_COMMIT_MESSAGE" value="チャタリング処理を追記" />
   </component>
   <component name="WindowStateProjectService">
     <state x="721" y="222" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608526881989">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="721" y="222" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1608526881989" />
-    <state x="473" y="135" key="CommitChangelistDialog2" timestamp="1607664385576">
-      <screen x="0" y="0" width="1792" height="1120" />
+    <state x="473" y="155" key="CommitChangelistDialog2" timestamp="1610091627667">
+      <screen x="0" y="23" width="1792" height="1097" />
     </state>
     <state x="473" y="135" key="CommitChangelistDialog2/0.0.1792.1120@0.0.1792.1120" timestamp="1607664385576" />
+    <state x="473" y="155" key="CommitChangelistDialog2/0.23.1792.1097@0.23.1792.1097" timestamp="1610091627667" />
     <state x="618" y="269" key="RollbackChangesDialog" timestamp="1607604954050">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -66,5 +85,9 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="582" y="274" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1608526892662" />
+    <state x="496" y="298" key="Vcs.Push.Dialog.v2" timestamp="1610091630679">
+      <screen x="0" y="23" width="1792" height="1097" />
+    </state>
+    <state x="496" y="298" key="Vcs.Push.Dialog.v2/0.23.1792.1097@0.23.1792.1097" timestamp="1610091630679" />
   </component>
 </project>

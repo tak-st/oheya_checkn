@@ -11,7 +11,7 @@ def postnum():
   time = datetime.datetime.now()
 
   try:
-    #CO2
+    # CO2
     # cur.execute("INSERT INTO device_data VALUES('" + str(1) + "','" + "CO2" + "','" + str(Num.get("Co2")) + "','" + str(time) + "')")
     # cur.execute("INSERT INTO device_data VALUES('" + str(1) + "','" + "Temp" + "','" + str(Num.get("temperature")) + "','" + str(time) + "')")
     # cur.execute("INSERT INTO device_data VALUES('" + str(1) + "','" + "Locate" + "','" + str(Num.get("location")) + "','" + str(time) + "')")
