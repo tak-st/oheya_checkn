@@ -13,7 +13,7 @@ class OperateLocalDatabase:
     cursor = connection.cursor()
     
     try:
-        cursor.execute("SELECT * FROM device_data WHERE %s" % (sensor_id))
+        cursor.execute("SELECT * FROM device_data WHERE ?", (sensor_id,))
         device_data = cursor.fetchall()
 
         return device_data
@@ -39,7 +39,7 @@ class OperateLocalDatabase:
     cursor = connection.cursor()
     
     try:
-        cursor.execute("SELECT * FROM device_data WHERE time > %s", time)
+        cursor.execute("SELECT * FROM device_data WHERE time > ?", (time,))
         data = cursor.fetchall()
 
         return data
@@ -56,33 +56,32 @@ class OperateRemoteDatabase:
     cursor = self.connection.cursor()
     
     try:
-        cursor.execute("SELECT * FROM device_data WHERE %s", sensor_id)
+        cursor.execute("SELECT * FROM device_data WHERE ?", (sensor_id,))
         device_data = cursor.fetchall()
 
         return device_data
     except pymysql.Error as e:
       print(e)
     finally:
-      connection.close()
+      self.connection.close()
 
   def insert_data(self, device_id, sensor_id, sensor_data, time):
     cursor = self.connection.cursor()
     try:
-        cursor.execute("INSERT INTO device_data VALUES(%s, %d, %s, %s)", (device_id, sensor_id, sensor_data, time))
-        conn.commit()
+        cursor.execute("INSERT INTO device_data VALUES(%s, %s, %s, %s)", (device_id, sensor_id, sensor_data, time))
+        self.connection.commit()
     except pymysql.Error as e:
       print(e)
-    finally:
-      connection.close()
+      self.connection.close()
 
   def select_maxtime(self, device_id):
     cursor = self.connection.cursor()
     try:
-        cursor.execute("SELECT MAX(time) FROM device_data WHERE %s GROUP BY device_id", device_id)
+        cursor.execute("SELECT MAX(time) FROM device_data WHERE ? GROUP BY device_id", (device_id,))
         maxtime = cursor.fetchone()
         
         return maxtime
     except pymysql.Error as e:
         print(e)
     finally:
-        connection.close()
+        self.connection.close()

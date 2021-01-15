@@ -45,16 +45,23 @@ def post_db():
     global gas_data
     
     while True:
-        #データクラスの初期化
-        temp_data_class = data.MeasureData(temp_data, device_id)
-        gps_data_class = data.MeasureData(gps_data, device_id)
-        co2_data_class = data.MeasureData(co2_data, device_id)
-        gas_data_class = data.MeasureData(gas_data, device_id)
-
-        temp_data_class.data_post_db()
-        gps_data_class.data_post_db()
-        co2_data_class.data_post_db()
-        gas_data_class.data_post_db()
+        
+        #0はやエラーは送信しない
+        if isinstance(temp_data, dict) and 0 not in temp_data.values():
+            temp_data_class = data.MeasureData(temp_data, device_id)
+            temp_data_class.data_post_db()
+        
+        if isinstance(gps_data, dict) and 0 not in gps_data.values():
+            gps_data_class = data.MeasureData(gps_data, device_id)
+            gps_data_class.data_post_db()
+        
+        if isinstance(co2_data, dict) and co2_data["co2"] != 0:
+            co2_data_class = data.MeasureData(co2_data, device_id)
+            co2_data_class.data_post_db()
+            
+        if isinstance(gas_data, dict) and 0 not in gas_data.values():
+            gas_data_class = data.MeasureData(gas_data, device_id)
+            gas_data_class.data_post_db()
 
         time.sleep(10)
 
@@ -66,20 +73,31 @@ def print_data():
     global gas_data
     
     while True:
-        
-        #データクラスの初期化
-        temp_data_class = data.MeasureData(temp_data, device_id)
-        gps_data_class = data.MeasureData(gps_data, device_id)
-        co2_data_class = data.MeasureData(co2_data, device_id)
-        gas_data_class = data.MeasureData(gas_data, device_id)
-
-        temp_data_class.data_print()
-        gps_data_class.data_print()
-        co2_data_class.data_print()
-        gas_data_class.data_print()
-
-        time.sleep(10)
-
+        #０やエラーは表示しない
+        #ボタンで表示切り替え
+        if isinstance(temp_data, dict) and 0 not in temp_data.values():
+            temp_data_class = data.MeasureData(temp_data, device_id)
+            temp_data_class.data_print()
+            temp_data_class.data_display()
+            time.sleep(3)
+            
+        if isinstance(gps_data, dict) and 0 not in gps_data.values():
+            gps_data_class = data.MeasureData(gps_data, device_id)
+            gps_data_class.data_print()
+            gps_data_class.data_display()
+            time.sleep(3)
+            
+        if isinstance(co2_data, dict) and co2_data["co2"] != 0:
+            co2_data_class = data.MeasureData(co2_data, device_id)
+            co2_data_class.data_print()
+            co2_data_class.data_display()
+            time.sleep(3)
+            
+        if isinstance(gas_data, dict) and 0 not in gas_data.values():
+            gas_data_class = data.MeasureData(gas_data, device_id)
+            gas_data_class.data_print()
+            gas_data_class.data_display()
+            time.sleep(3)
 
 def soundEffect(num):
 

@@ -30,51 +30,45 @@ class MeasureData:
 
   def data_post_db(self):
     local = op.OperateLocalDatabase()
-    #remote = op.OperateRemoteDatabase()
-    #setup = setup.Setup()
+    remote = op.OperateRemoteDatabase()
+    Setup = setup.SetUp()
     time = datetime.datetime.now()
 
     if "temp" in self.measure_data:
       local.insert_data(self.device_id, 0, str(self.measure_data["temp"]), str(time))
       local.insert_data(self.device_id, 1, str(self.measure_data["humidity"]), str(time))
-      """
-      if setup.check_device_id():
+      
+      if Setup.check_device_id():
         remote.insert_data(self.device_id, 0, str(self.measure_data["temp"]), str(time))
         remote.insert_data(self.device_id, 1, str(self.measure_data["humidity"]), str(time))
-      """
 
     elif "latitude" in self.measure_data:
       local.insert_data(self.device_id, 2, str(self.measure_data["latitude"]), str(time))
       local.insert_data(self.device_id, 3, str(self.measure_data["longitude"]), str(time))
-      """
-      if setup.check_device_id():
+      
+      if Setup.check_device_id():
         remote.insert_data(self.device_id, 2, str(self.measure_data["latitude"]), str(time))
         remote.insert_data(self.device_id, 3, str(self.measure_data["longitude"]), str(time))
-    """
 
     elif "co2" in self.measure_data:
       local.insert_data(self.device_id, 4, str(self.measure_data["co2"]), str(time))
-      """
-      if setup.check_device_id():
+      
+      if Setup.check_device_id():
         remote.insert_data(self.device_id, 4, str(self.measure_data["co2"]), str(time))
-    """
 
     elif "dust" in self.measure_data:
       local.insert_data(self.device_id, 5, str(self.measure_data["dust"]), str(time))
       
-      """
-      if setup.check_device_id():
+      if Setup.check_device_id():
         remote.insert_data(self.device_id, 5, str(self.measure_data["dust"]), str(time))
-    """
 
     elif "gas" in self.measure_data:
       local.insert_data(self.device_id, 6, str(self.measure_data["gas"]), str(time))
-      """
-      if setup.check_device_id():
-        remote.insert_data(self.device_id, 6, str(self.measure_data["gas"]), str(time))
-    """
       
-      """
+      if Setup.check_device_id():
+        remote.insert_data(self.device_id, 6, str(self.measure_data["gas"]), str(time))
+      
+    """
     remote_max_time = remote.select_maxtime(self.device_id)
 
     with local.comparison_time(remote_max_time) as unsent_data:
