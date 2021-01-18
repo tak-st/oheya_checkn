@@ -1,4 +1,5 @@
 import time
+import simpleaudio as sa
 import connect_database as db
 import measure_data as data
 import setup
@@ -122,15 +123,16 @@ def soundEffect(num):
 
         if state == 1:
             if num == 1:
-                sound = AudioSegment.from_mp3("gs-16b-2c-44100hz.mp3")
-                play(sound)
+                wav1 = sa.WaveObject.from_wave_file("音声ファイルのルートを指定する")
+                play_obj = wav1.play()
             elif num == 2:
-                sound = AudioSegment.from_mp3("gs-16b-2c-44100hz.mp3")
-                play(sound)
+                wav2 = sa.WaveObject.from_wave_file("音声ファイルのルートを指定する")
+                play_obj = wav2.play()
             elif num == 3:
-                sound = AudioSegment.from_mp3("gs-16b-2c-44100hz.mp3")
-                play(sound)
-
+                wav3 = sa.WaveObject.from_wave_file("音声ファイルのルートを指定する")
+                play_obj = wav2.play()
+            
+            play_obj.wait_done()
 
 def lcd_display():
     # グローバル変数
