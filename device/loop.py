@@ -3,6 +3,7 @@ import simpleaudio as sa
 import connect_database as db
 import measure_data as data
 import setup
+import wiringpi
 from pydub import AudioSegment
 from pydub.playback import play
 from co2 import mh_z19 as co2
@@ -12,47 +13,80 @@ from temperature import temperature as temp
 
 
 class Loop:
-    
     def __init__(self):
-        
-        #セットアップのインスタンス生成
-        first_setup = setup.FirstSetup()
-        #デバイスIDの取得
-        self.device_id = first_setup.get_device_id()
 
-        #各センサーのデータ取得
+        # セットアップのインスタンス生成
+        first_setup = setup.FirstSetup()
+        # デバイスIDの取得
+        self.device_id = first_setup.get_device_id()
+        # ボタン識別用のカウント
+        self.button_count = 0
+        #ボタンが押されたという証
+        self.display_flg = False
+        #データが変わったという証
+        self.temp_change_flg = False
+        self.gps_change_flg = False
+        self.co2_change_flg = False
+        self.gas_change_flg = False
+
+        # 各センサーのデータ取得
         self.temp_data = {"temp": 0, "humidity": 0}
         self.gps_data = {"latitude": 0, "longitude": 0}
         self.co2_data = {"co2": 0}
         self.gas_data = {"gas": 0}
 
-
     def get_data(self):
-        
+
         while True:
-            self.temp_data = temp.get_temperature()
-            self.gps_data = gps.get_gps()
-            self.co2_data = co2.read_all()
-            self.gas_data = gas.get_gas()
+
+            temp_data = temp.get_temperature()
+            gps_data = gps.get_gps()
+            co2_data = co2.read_all()
+            gas_data = gas.get_gas()
+
+            if self.temp_data != temp_data:
+                self.temp_data = temp_data
+                self.temp_change_flg = True
+            else:
+                self.temp_change_flg = False
+
+            if self.gps_data != gps_data:
+                self.gps_data = gps_data
+                self.gps_change_flg = True
+            else:
+                self.gps_change_flg = False
+
+            if self.co2_data != co2_data:
+                self.co2_data = co2_data
+                self.co2_change_flg = True
+            else:
+                self.co2_change_flg = False
+
+            if self.gas_data != gas_data:
+                self.gas_data = gas_data
+                self.gas_change_flg = True
+            else:
+                self.gas_change_flg = False
+
             time.sleep(5)
 
     def post_db(self):
-        
+
         while True:
-            
-            #0はやエラーは送信しない
+
+            # 0はやエラーは送信しない
             if isinstance(self.temp_data, dict) and 0 not in self.temp_data.values():
                 temp_data_class = data.MeasureData(self.temp_data, self.device_id)
                 temp_data_class.data_post_db()
-            
+
             if isinstance(self.gps_data, dict) and 0 not in self.gps_data.values():
                 gps_data_class = data.MeasureData(self.gps_data, self.device_id)
                 gps_data_class.data_post_db()
-            
+
             if isinstance(self.co2_data, dict) and self.co2_data["co2"] != 0:
                 co2_data_class = data.MeasureData(self.co2_data, self.device_id)
                 co2_data_class.data_post_db()
-                
+
             if isinstance(self.gas_data, dict) and 0 not in self.gas_data.values():
                 gas_data_class = data.MeasureData(self.gas_data, self.device_id)
                 gas_data_class.data_post_db()
@@ -60,37 +94,117 @@ class Loop:
             time.sleep(10)
 
     def print_data(self):
-        
+
         while True:
-            #０やエラーは表示しない
-            #ボタンで表示切り替え
-            if isinstance(self.temp_data, dict) and 0 not in self.temp_data.values():
-                temp_data_class = data.MeasureData(self.temp_data, self.device_id)
-                temp_data_class.data_print()
-                temp_data_class.data_display()
-                time.sleep(3)
-                
-            if isinstance(self.gps_data, dict) and 0 not in self.gps_data.values():
-                gps_data_class = data.MeasureData(self.gps_data, self.device_id)
-                gps_data_class.data_print()
-                gps_data_class.data_display()
-                time.sleep(3)
-                
-            if isinstance(self.co2_data, dict) and self.co2_data["co2"] != 0:
-                co2_data_class = data.MeasureData(self.co2_data, self.device_id)
-                co2_data_class.data_print()
-                co2_data_class.data_display()
-                time.sleep(3)
-                
-            if isinstance(self.gas_data, dict) and 0 not in self.gas_data.values():
-                gas_data_class = data.MeasureData(self.gas_data, self.device_id)
-                gas_data_class.data_print()
-                gas_data_class.data_display()
-                time.sleep(3)
+            # ０やエラーは表示しない
+            # ボタンで表示切り替え
+
+
+            if self.button_count == 0:
+                if isinstance(self.temp_data, dict) and 0 not in self.temp_data.values():
+                    temp_data_class = data.MeasureData(self.temp_data, self.device_id)
+                    temp_data_class.data_print()
+                    if self.display_flg == True:
+                        temp_data_class.data_display()
+                        self.display_flg = False
+                    if self.temp_change_flg == True:
+                        temp_data_class.data_display()
+                        self.temp_change_flg = False
+
+            elif self.button_count == 1:
+                if isinstance(self.gps_data, dict) and 0 not in self.gps_data.values():
+                    gps_data_class = data.MeasureData(self.gps_data, self.device_id)
+                    gps_data_class.data_print()
+                    if self.display_flg == True:
+                        gps_data_class.data_display()
+                        self.display_flg = False
+                    if self.gps_change_flg == True:
+                        gps_data_class.data_display()
+                        self.gps_change_flg = False
+
+            elif self.button_count == 2:
+                if isinstance(self.co2_data, dict) and self.co2_data["co2"] != 0:
+                    co2_data_class = data.MeasureData(self.co2_data, self.device_id)
+                    co2_data_class.data_print()
+                    if self.display_flg == True:
+                        co2_data_class.data_display()
+                        self.display_flg = False
+                    if self.co2_change_flg == True:
+                        co2_data_class.data_display()
+                        self.co2_change_flg = False
+
+            elif self.button_count == 3:
+                display_flag = True
+                if isinstance(self.gas_data, dict) and 0 not in self.gas_data.values():
+                    gas_data_class = data.MeasureData(self.gas_data, self.device_id)
+                    gas_data_class.data_print()
+                    if self.display_flg == True:
+                        gas_data_class.data_display()
+                        self.display_flg = False
+                    if self.gas_change_flg == True:
+                        gas_data_class.data_display()
+                        self.gas_change_flg = False
+
+    def check_bt(self):
+
+        bt1 = 6
+        bt2 = 13
+        bt3 = 19
+        bt4 = 26
+
+        flg1 = False
+        flg2 = False
+        flg3 = False
+        flg4 = False
+
+        wiringpi.wiringPiSetupGpio()
+
+        wiringpi.pinMode(bt1, 0)
+        wiringpi.pinMode(bt2, 0)
+        wiringpi.pinMode(bt3, 0)
+        wiringpi.pinMode(bt4, 0)
+
+        wiringpi.pullUpDnControl(bt1, 2)
+        wiringpi.pullUpDnControl(bt2, 2)
+        wiringpi.pullUpDnControl(bt3, 2)
+        wiringpi.pullUpDnControl(bt4, 2)
+
+        while True:
+
+            if wiringpi.digitalRead(bt2) == 0:
+                if flg2 is False:
+                    self.button_count -= 1
+                    flg2 = True
+                    self.display_flg = True
+
+                if self.button_count == -1:
+                    self.button_count = 3
+                elif self.button_count == -2:
+                    self.button_count = 2
+                elif self.button_count == -3:
+                    self.button_count = 1
+            else:
+                flg2 = False
+
+            if wiringpi.digitalRead(bt1) == 0:
+                if flg1 is False:
+                    self.button_count += 1
+                    flg1 = True
+                    self.display_flg = True
+            else:
+                flg1 = False
+
+            if self.button_count == 4:
+                self.button_count = 0
+            elif self.button_count == -4:
+                self.button_count = 0
+
 
 """
 def soundEffect(num):
 
+    button_pin = 19
+    
     # GPIO初期化
     wiringpi.wiringPiSetupGpio()
 
@@ -148,8 +262,8 @@ def lcd_display():
     gas_data_class = data.MeasureData(gas_data, device_id)
 
     # ボタンを繋いだGPIOの識別番号
-    button_pin1 = 18
-    button_pin2 = 23
+    button_pin1 = 6
+    button_pin2 = 13
 
     # GPIO初期化
     wiringpi.wiringPiSetupGpio()
@@ -197,7 +311,6 @@ def lcd_display():
             cnt = 0
 
         if cnt == 0:
-            soundEffect(1)
             temp_data_class.data_display()
         elif cnt == 1:
             soundEffect(2)
