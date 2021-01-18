@@ -103,7 +103,7 @@ def soundEffect(num):
     wiringpi.pullUpDnControl(button_pin, 2)
 
     flg = False
-    state = 0
+    state = 1
     lcd = LCD(2, 0x027, True)
 
     while True:
