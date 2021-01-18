@@ -104,10 +104,10 @@ class Loop:
                 if isinstance(self.temp_data, dict) and 0 not in self.temp_data.values():
                     temp_data_class = data.MeasureData(self.temp_data, self.device_id)
                     temp_data_class.data_print()
-                    if self.display_flg == True:
+                    if self.display_flg is True:
                         temp_data_class.data_display()
                         self.display_flg = False
-                    if self.temp_change_flg == True:
+                    if self.temp_change_flg is True:
                         temp_data_class.data_display()
                         self.temp_change_flg = False
 
@@ -115,10 +115,10 @@ class Loop:
                 if isinstance(self.gps_data, dict) and 0 not in self.gps_data.values():
                     gps_data_class = data.MeasureData(self.gps_data, self.device_id)
                     gps_data_class.data_print()
-                    if self.display_flg == True:
+                    if self.display_flg is True:
                         gps_data_class.data_display()
                         self.display_flg = False
-                    if self.gps_change_flg == True:
+                    if self.gps_change_flg is True:
                         gps_data_class.data_display()
                         self.gps_change_flg = False
 
@@ -126,10 +126,10 @@ class Loop:
                 if isinstance(self.co2_data, dict) and self.co2_data["co2"] != 0:
                     co2_data_class = data.MeasureData(self.co2_data, self.device_id)
                     co2_data_class.data_print()
-                    if self.display_flg == True:
+                    if self.display_flg is True:
                         co2_data_class.data_display()
                         self.display_flg = False
-                    if self.co2_change_flg == True:
+                    if self.co2_change_flg is True:
                         co2_data_class.data_display()
                         self.co2_change_flg = False
 
@@ -138,10 +138,10 @@ class Loop:
                 if isinstance(self.gas_data, dict) and 0 not in self.gas_data.values():
                     gas_data_class = data.MeasureData(self.gas_data, self.device_id)
                     gas_data_class.data_print()
-                    if self.display_flg == True:
+                    if self.display_flg is True:
                         gas_data_class.data_display()
                         self.display_flg = False
-                    if self.gas_change_flg == True:
+                    if self.gas_change_flg is True:
                         gas_data_class.data_display()
                         self.gas_change_flg = False
 

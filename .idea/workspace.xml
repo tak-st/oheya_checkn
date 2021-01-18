@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4b66e66-40a5-4fd2-b55b-8d6ee63ac0bc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/device/loop.py" beforeDir="false" afterPath="$PROJECT_DIR$/device/loop.py" afterDir="false" />
-    </list>
+    <list default="true" id="a4b66e66-40a5-4fd2-b55b-8d6ee63ac0bc" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="true" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,7 +53,14 @@
       <option name="project" value="LOCAL" />
       <updated>1610944967974</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="ボタンの制御とLCDの切り替えの処理を追記しました。&#10;サウンドは今度やります。">
+      <created>1610949991857</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1610949991857</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -66,7 +70,8 @@
     <MESSAGE value="コードのエラーを対処し自動フォーマットにより整理しました。" />
     <MESSAGE value="MP3再生をWAV再生に変更しました。" />
     <MESSAGE value="コードを修正" />
-    <option name="LAST_COMMIT_MESSAGE" value="コードを修正" />
+    <MESSAGE value="ボタンの制御とLCDの切り替えの処理を追記しました。&#10;サウンドは今度やります。" />
+    <option name="LAST_COMMIT_MESSAGE" value="ボタンの制御とLCDの切り替えの処理を追記しました。&#10;サウンドは今度やります。" />
   </component>
   <component name="WindowStateProjectService">
     <state x="721" y="240" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1610947973177">
@@ -74,11 +79,11 @@
     </state>
     <state x="721" y="222" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1608526881989" />
     <state x="721" y="240" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1792.1097@0.23.1792.1097" timestamp="1610947973177" />
-    <state x="889" y="91" key="CommitChangelistDialog2" timestamp="1610944967889">
+    <state x="889" y="91" key="CommitChangelistDialog2" timestamp="1610949991759">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
     <state x="473" y="135" key="CommitChangelistDialog2/0.0.1792.1120@0.0.1792.1120" timestamp="1607664385576" />
-    <state x="889" y="91" key="CommitChangelistDialog2/0.23.1792.1097@0.23.1792.1097" timestamp="1610944967889" />
+    <state x="889" y="91" key="CommitChangelistDialog2/0.23.1792.1097@0.23.1792.1097" timestamp="1610949991759" />
     <state x="618" y="269" key="RollbackChangesDialog" timestamp="1607604954050">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
@@ -87,10 +92,10 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="582" y="274" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1608526892662" />
-    <state x="496" y="298" key="Vcs.Push.Dialog.v2" timestamp="1610944971223">
+    <state x="496" y="298" key="Vcs.Push.Dialog.v2" timestamp="1610949993774">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
-    <state x="496" y="298" key="Vcs.Push.Dialog.v2/0.23.1792.1097@0.23.1792.1097" timestamp="1610944971223" />
+    <state x="496" y="298" key="Vcs.Push.Dialog.v2/0.23.1792.1097@0.23.1792.1097" timestamp="1610949993774" />
     <state x="561" y="268" width="670" height="676" key="search.everywhere.popup" timestamp="1610949321332">
       <screen x="0" y="23" width="1792" height="1097" />
     </state>
