@@ -29,6 +29,9 @@ class Loop:
         self.co2_change_flg = False
         self.gas_change_flg = False
 
+        #音声を再生するかのフラグ(Trueなら再生)
+        self.sound_flg = True
+
         # 各センサーのデータ取得
         self.temp_data = {"temp": 0, "humidity": 0}
         self.gps_data = {"latitude": 0, "longitude": 0}
@@ -144,6 +147,21 @@ class Loop:
                         gas_data_class.data_display()
                         self.gas_change_flg = False
 
+    def soundeffect(self,num):
+
+        if self.sound_flg is True:
+            if num == 1:
+                wav1 = sa.WaveObject.from_wave_file("音声ファイルのルートを指定する")
+                play_obj = wav1.play()
+            elif num == 2:
+                wav2 = sa.WaveObject.from_wave_file("音声ファイルのルートを指定する")
+                play_obj = wav2.play()
+            else:
+                wav3 = sa.WaveObject.from_wave_file("音声ファイルのルートを指定する")
+                play_obj = wav3.play()
+
+            play_obj.wait_done()
+
     def check_bt(self):
 
         bt1 = 6
@@ -193,7 +211,16 @@ class Loop:
                     self.button_count = 0
             else:
                 flg1 = False
-
+                
+            #音声を再生するかしないかの処理
+            if wiringpi.digitalRead(bt3) == 0:
+                if flg3 is False:
+                    if self.sound_flg is True:
+                        self.sound_flg = False
+                    else:
+                        self.sound_flg = True
+                else:
+                    flg3 = False
 
 """
 def soundEffect(num):
