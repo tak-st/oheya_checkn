@@ -26,14 +26,17 @@ thread_human = threading.Thread(target=human.get_human)
 thread_get_data = threading.Thread(target=Loop.get_data)
 thread_print_data = threading.Thread(target=Loop.print_data)
 thread_post_db = threading.Thread(target=Loop.post_db)
+thread_check_bt = threading.Thread(target=Loop.check_bt)
 thread_human.setDaemon(True)
 thread_get_data.setDaemon(True)
 thread_print_data.setDaemon(True)
 thread_post_db.setDaemon(True)
+thread_check_bt.setDaemon(True)
 thread_human.start()
 thread_get_data.start()
 thread_print_data.start()
 thread_post_db.start()
+thread_check_bt.start()
 
 while True:
     pass

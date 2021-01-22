@@ -12,7 +12,7 @@ GPIO_PIN=18
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(GPIO_PIN,GPIO.IN)
 
-if __name__=='__main__':
+def get_human():
     try:
         print("cancel:CTRL+C")
         cnt=1

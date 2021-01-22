@@ -1,5 +1,5 @@
 import time
-import simpleaudio as sa
+#import simpleaudio as sa
 import connect_database as db
 import measure_data as data
 import setup
@@ -99,13 +99,12 @@ class Loop:
             # ０やエラーは表示しない
             # ボタンで表示切り替え
 
-
             if self.button_count == 0:
                 if isinstance(self.temp_data, dict) and 0 not in self.temp_data.values():
                     temp_data_class = data.MeasureData(self.temp_data, self.device_id)
-                    temp_data_class.data_print()
                     if self.display_flg is True:
                         temp_data_class.data_display()
+                        temp_data_class.data_print()
                         self.display_flg = False
                     if self.temp_change_flg is True:
                         temp_data_class.data_display()
@@ -114,9 +113,9 @@ class Loop:
             elif self.button_count == 1:
                 if isinstance(self.gps_data, dict) and 0 not in self.gps_data.values():
                     gps_data_class = data.MeasureData(self.gps_data, self.device_id)
-                    gps_data_class.data_print()
                     if self.display_flg is True:
                         gps_data_class.data_display()
+                        gps_data_class.data_print()
                         self.display_flg = False
                     if self.gps_change_flg is True:
                         gps_data_class.data_display()
@@ -125,9 +124,9 @@ class Loop:
             elif self.button_count == 2:
                 if isinstance(self.co2_data, dict) and self.co2_data["co2"] != 0:
                     co2_data_class = data.MeasureData(self.co2_data, self.device_id)
-                    co2_data_class.data_print()
                     if self.display_flg is True:
                         co2_data_class.data_display()
+                        co2_data_class.data_print()
                         self.display_flg = False
                     if self.co2_change_flg is True:
                         co2_data_class.data_display()
@@ -137,9 +136,9 @@ class Loop:
                 display_flag = True
                 if isinstance(self.gas_data, dict) and 0 not in self.gas_data.values():
                     gas_data_class = data.MeasureData(self.gas_data, self.device_id)
-                    gas_data_class.data_print()
                     if self.display_flg is True:
                         gas_data_class.data_display()
+                        gas_data_class.data_print()
                         self.display_flg = False
                     if self.gas_change_flg is True:
                         gas_data_class.data_display()
@@ -171,33 +170,29 @@ class Loop:
 
         while True:
 
-            if wiringpi.digitalRead(bt2) == 0:
+            if wiringpi.digitalRead(bt1) == 0:
                 if flg2 is False:
                     self.button_count -= 1
+                    print("- button" + str(self.button_count))
                     flg2 = True
                     self.display_flg = True
 
                 if self.button_count == -1:
                     self.button_count = 3
-                elif self.button_count == -2:
-                    self.button_count = 2
-                elif self.button_count == -3:
-                    self.button_count = 1
             else:
                 flg2 = False
 
-            if wiringpi.digitalRead(bt1) == 0:
+            if wiringpi.digitalRead(bt2) == 0:
                 if flg1 is False:
                     self.button_count += 1
+                    print("+button" + str(self.button_count))
                     flg1 = True
                     self.display_flg = True
+                    
+                if self.button_count == 4:
+                    self.button_count = 0
             else:
                 flg1 = False
-
-            if self.button_count == 4:
-                self.button_count = 0
-            elif self.button_count == -4:
-                self.button_count = 0
 
 
 """
