@@ -4,24 +4,84 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4b66e66-40a5-4fd2-b55b-8d6ee63ac0bc" name="Default Changelist" comment="" />
+    <list default="true" id="a4b66e66-40a5-4fd2-b55b-8d6ee63ac0bc" name="Default Changelist" comment="とりあえずメイン的画面を作成">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/bootstrap.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/.htaccess" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/503.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/database.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/detail.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/getdata.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/js/autoreload.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/js/autoreload2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/maintenance.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/oheya_checkn.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/oheya_checkn.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="true" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="WebMain" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="PhpDebugGeneral" listening_started="true" />
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.2" />
   <component name="ProjectId" id="1lSyMwlAzoU8eL2f0i1ybyqWMFR" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/web/js" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\2180264\WebstormProjects\oheya_checkn\web\js" />
+      <recent name="C:\Users\2180264\WebstormProjects\oheya_checkn\web" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\2180264\WebstormProjects\oheya_checkn\web" />
+      <recent name="C:\Users\2180264\WebstormProjects\oheya_checkn\web\icon" />
+      <recent name="C:\Users\2180264\WebstormProjects\oheya_checkn" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -31,6 +91,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1607604742424</updated>
+      <workItem from="1610098644396" duration="7626000" />
+      <workItem from="1611300537987" duration="600000" />
+      <workItem from="1611842554427" duration="25999000" />
     </task>
     <task id="LOCAL-00001" summary="コードのエラーを対処し自動フォーマットにより整理しました。">
       <created>1607664385806</created>
@@ -39,32 +102,33 @@
       <option name="project" value="LOCAL" />
       <updated>1607664385806</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="とりあえずメイン的画面を作成">
+      <created>1610687990767</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1610687990768</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="コードのエラーを対処し自動フォーマットにより整理しました。" />
-    <option name="LAST_COMMIT_MESSAGE" value="コードのエラーを対処し自動フォーマットにより整理しました。" />
+    <MESSAGE value="とりあえずメイン的画面を作成" />
+    <option name="LAST_COMMIT_MESSAGE" value="とりあえずメイン的画面を作成" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="721" y="222" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608526881989">
-      <screen x="0" y="0" width="1792" height="1120" />
-    </state>
-    <state x="721" y="222" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1608526881989" />
-    <state x="473" y="135" key="CommitChangelistDialog2" timestamp="1607664385576">
-      <screen x="0" y="0" width="1792" height="1120" />
-    </state>
-    <state x="473" y="135" key="CommitChangelistDialog2/0.0.1792.1120@0.0.1792.1120" timestamp="1607664385576" />
-    <state x="618" y="269" key="RollbackChangesDialog" timestamp="1607604954050">
-      <screen x="0" y="0" width="1792" height="1120" />
-    </state>
-    <state x="618" y="269" key="RollbackChangesDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1607604954050" />
-    <state x="582" y="274" key="SettingsEditor" timestamp="1608526892662">
-      <screen x="0" y="0" width="1792" height="1120" />
-    </state>
-    <state x="582" y="274" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1608526892662" />
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
