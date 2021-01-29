@@ -8,7 +8,7 @@ require_once 'database.php';
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="./js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/autoreload.js"></script>
+    <script src="js/autoreload2.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 <body>
@@ -19,7 +19,7 @@ require_once 'database.php';
     </a>
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link  " href="index.php">ホーム</a>
+            <a class="nav-link" href="index.php">ホーム</a>
         </li>
     </ul>
     <?php
@@ -39,7 +39,7 @@ require_once 'database.php';
     ?>
     <div id="showinfo" class="row">
         <?php
-        get_userdevice(100)
+        get_devicedetail($_GET["id"])
         ?>
     </div>
 </div>
