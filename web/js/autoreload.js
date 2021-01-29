@@ -3,7 +3,7 @@ $(function () {
         $.ajax({
             url: "getdata.php",
             type: 'POST',
-            data: {mode: 1, user: "100"},
+            data: {mode: "1", user: "100"},
             timeout: 10000,
             dataType: 'text'
         }).done(function (data) {
@@ -22,7 +22,7 @@ $(function () {
             $.ajax({
                 url: "getdata.php",
                 type: 'POST',
-                data: {user: "100"},
+                data: {mode: "1", user: "100"},
                 timeout: 10000,
                 dataType: 'text'
             }).done(function (data) {

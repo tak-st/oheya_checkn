@@ -80,10 +80,11 @@ function get_devicedisp($device_id){
     while ($row = $stmt->fetch()) {
         $d2 = $pdo->query("SELECT sensor_data,time FROM device_data WHERE device_id = $device_id AND sensor_id = $row[sensor_id] ORDER BY time DESC limit 1");
         while ($row2 = $d2->fetch()){
-            if($row[sensor_type] != "Latitude" and $row[sensor_type] != "Longitude" ){}
+            if($row[sensor_type] != "Latitude" and $row[sensor_type] != "Longitude" ){
                 $str = $str . Localize($row[sensor_type],"ja-jp") . " " . $row2[sensor_data] . $row[sensor_unit] . "　";
             }
         }
+    }
     return $str;
 }
 function get_lastUpdated($device_id){
@@ -148,6 +149,8 @@ var chart = new Chart(ctx, {
     <?php
 }
 function get_devicedetail($device_id){
+    $latit = 0;
+    $longi = 0;
     $pdo = connect();
     $stmt = $pdo->query("SELECT * FROM device WHERE device_id = $device_id");
         while ($row = $stmt->fetch()) {
@@ -172,9 +175,35 @@ function get_devicedetail($device_id){
             </div>
         </div>
 <?php
+            }else{
+                if($row1[sensor_type] === "Latitude"){
+                    $latit = $row2[sensor_data];
+                }
+                if($row1[sensor_type] === "Longitude"){
+                    $longi = $row2[sensor_data];
+                }
+                $time = $row2[time];
             }
         }
-}
+    }
+    if($latit != 0 or $longi != 0){
+                        ?>
+        <div class="col-sm-6 col-lg-4">
+            <div class="card h-100 mt-1">
+                <div class="card-header">
+                <h5 class=\"card-title\"> GPS </h5>
+                </div>
+                <div class="card-body">
+                    <?php
+                    echo "<p class=\"card-text\">緯度 : ". $latit . "</p>";
+                    echo "<p class=\"card-text\">経度 : ". $longi . "</p>";
+                    echo "<p class=\"card-text\">最終更新時刻 : ". $time  . "</p>";?>
+                    <a href="https://www.google.com/maps/search/?api=1&query=<?php echo $latit  ?>,<?php echo $longi  ?>" class="btn btn-primary">Google Mapで開く</a>
+                </div>
+            </div>
+        </div>
+<?php
+    }
 }
 function Localize($str,$language){
     if($language === "ja-jp"){

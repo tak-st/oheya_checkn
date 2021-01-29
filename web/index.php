@@ -19,7 +19,7 @@ require_once 'database.php';
     </a>
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link" href="#">ホーム</a>
+            <a class="nav-link  " href="index.php">ホーム</a>
         </li>
     </ul>
     <?php
