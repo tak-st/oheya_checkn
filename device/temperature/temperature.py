@@ -14,14 +14,6 @@ def get_temperature():
         temperature_f = temperature_c * (9 / 5) + 32
         humidity = dhtDevice.humidity
 
-        """
-        print(
-            "Temp: {:.1f} F / {:.1f} C    Humidity: {}% ".format(
-                temperature_f, temperature_c, humidity
-            )
-        )
-        """
-
         tempval = {"temp": temperature_c, "humidity": humidity}
 
         return tempval
@@ -33,11 +25,3 @@ def get_temperature():
         dhtDevice.exit()
         raise error
 
-try :
-    while 1 :
-        tem = getTemperature()
-        print(tem)
-        time.sleep(3)
-
-except KeyboardInterrupt:
-    pass

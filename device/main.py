@@ -1,116 +1,42 @@
 import threading
 import time
 import wiringpi
+import setup
+import loop
+import os
+from humansensor import humansensor as human
 
-from device.co2 import getco2 as co2
-from device.gps import getgps as gps
-from device.humansensor import humansensor as human
-from device.temperature import temperature as temp
+#セットアップのインスタンス生成
+first_setup = setup.FirstSetup()
+#デバイスIDの取得
+device_id = first_setup.get_device_id()
 
-# ボタンを繋いだGPIOの識別番号
-button_pin1 = 18
-button_pin2 = 23
+#リモートデータベースにデバイスID
+first_setup.post_device_id()
+#ローカーデータベースの生成
+if os.path.isfile("my_air_data.db"):
+    print("DB is exist")
+else:
+    first_setup.create_database()
 
-# GPIO初期化
-wiringpi.wiringPiSetupGpio()
+#loopクラスのインスタンス生成
+Loop = loop.Loop()
 
-# GPIOを出力モード(1)に設定
-wiringpi.pinMode(button_pin1, 0)
-wiringpi.pinMode(button_pin2, 0)
-
-# 端子に何も接続されていない場合の状態を設定
-# 3.3Vの場合には「2」（プルアップ）
-# 0Vの場合は「1」と設定する（プルダウン）
-wiringpi.pullUpDnControl(button_pin1, 2)
-wiringpi.pullUpDnControl(button_pin2, 2)
-
-device_id = 1111
-
-cnt = 0
-
-
-def push_button():
-    # チャタリング対策用
-    flg1 = False
-    flg2 = False
-    global cnt
-
-    while True:
-        # ボタン入力を識別
-        # GPIO端子の状態を読み込む
-        # ボタンを押すと「0」、放すと「1」になる
-        # GPIOの状態が0V(0)であるか比較
-        if (wiringpi.digitalRead(button_pin1) == 0):
-            if flg1 is False:
-                cnt += 1
-                flg1 = True
-        else:
-            flg1 = False
-
-        if (wiringpi.digitalRead(button_pin2) == 0):
-            if flg2 is False:
-                cnt -= 1
-                flg2 = True
-            if cnt == -1:
-                cnt = 2
-            elif cnt == -2:
-                cnt = 1
-        else:
-            flg2 = False
-
-        if cnt == 3:
-            cnt = 0
-        elif cnt == -3:
-            cnt = 0
-
-
-def main_loop():
-    while True:
-        try:
-            # 各センサーのデータ取得
-            temp_data = temp.get_temperature()
-            gps_data = gps.get_gps()
-            co2_data = co2.read_all()
-
-            if temp_data is not None:
-                Temperature = mesdata.MeasureClass(temp_data, device_id)
-                Temperature.data_print()
-                if cnt == 0:
-                    Temperature.data_display()
-            else:
-                print("temperature is none")
-
-            if gps_data is not None:
-                Gps = mesdata.MeasureClass(gps_data, device_id)
-                Gps.data_print()
-                if cnt == 1:
-                    Gps.data_display()
-            else:
-                print("gps is none")
-
-            if co2_data is not None:
-                Co2 = mesdata.MeasureClass(co2_data, device_id)
-                Co2.data_print()
-                if cnt == 2:
-                    Co2.data_display()
-            else:
-                print("co2 is none")
-
-            time.sleep(3)
-
-        except KeyboardInterrupt:
-            break
-
-
-thread_main = threading.Thread(target=main_loop)
 thread_human = threading.Thread(target=human.get_human)
-thread_button = threading.Thread(target=push_button)
-thread_main.setDaemon(True)
+thread_get_data = threading.Thread(target=Loop.get_data)
+thread_print_data = threading.Thread(target=Loop.print_data)
+thread_post_db = threading.Thread(target=Loop.post_db)
+thread_check_bt = threading.Thread(target=Loop.check_bt)
 thread_human.setDaemon(True)
-thread_button.setDaemon(True)
-thread_main.start()
+thread_get_data.setDaemon(True)
+thread_print_data.setDaemon(True)
+thread_post_db.setDaemon(True)
+thread_check_bt.setDaemon(True)
 thread_human.start()
-thread_button.start()
+thread_get_data.start()
+thread_print_data.start()
+thread_post_db.start()
+thread_check_bt.start()
 
 while True:
     pass

@@ -6,7 +6,6 @@ import math
 import sqlite3
 import subprocess
 import connect_database as db
-import MySQLdb
 import pymysql
 
 class FirstSetup:
@@ -17,9 +16,11 @@ class FirstSetup:
         pymysql.install_as_MySQLdb()
         self.lcd = jlcd.Jlcd(2,0x27,True)
 
+    def get_device_id(self):
+        return self.mac
+
     def id_display(self):
         #LCDに表示
-
         self.lcd.message("Please input ID", 1)
         self.lcd.message(str(self.mac),2)
 
@@ -47,8 +48,8 @@ class FirstSetup:
                 CREATE TABLE IF NOT EXISTS device_data(
                 device_id VARCHAR NOT NULL,
                 sensor_id INTEGER NOT NULL,
-                time INTEGER NOT NULL,
                 sensor_data INTEGER,
+                time INTEGER NOT NULL,
                 PRIMARY KEY (device_id, sensor_id, time),
                 FOREIGN KEY (device_id) REFERENCES device(device_id),
                 FOREIGN KEY (sensor_id) REFERENCES sensor(sensor_id))
@@ -63,59 +64,66 @@ class FirstSetup:
         #sensor表にデータを挿入
         conn.execute('''INSERT INTO sensor(
             sensor_id, sensor_name, sensor_type, sensor_unit, sensor_min, sensor_max)
-            values(1, "DHT22", "Temperature", "°C", -50, 120)'''
+            values(0, "DHT22", "Temperature", "°C", -50, 120)'''
             )
 
         conn.execute('''INSERT INTO sensor(
             sensor_id, sensor_name, sensor_type, sensor_unit, sensor_min, sensor_max)
-            values(2, "DHT22", "Humid", "%", 0, 100)'''
+            values(1, "DHT22", "Humid", "%", 0, 100)'''
             )
         conn.execute('''INSERT INTO sensor(
             sensor_id, sensor_name, sensor_type, sensor_unit, sensor_min, sensor_max)
-            values(3, "GYSFDMAXB", "Latitude", "", 0, 360)'''
-            )
-
-        conn.execute('''INSERT INTO sensor(
-            sensor_id, sensor_name, sensor_type, sensor_unit, sensor_min, sensor_max)
-            values(4, "GYSFDMAXB", "Longitude", "", 0, 360)'''
+            values(2, "GYSFDMAXB", "Latitude", "", 0, 360)'''
             )
 
         conn.execute('''INSERT INTO sensor(
             sensor_id, sensor_name, sensor_type, sensor_unit, sensor_min, sensor_max)
-            values(5, "MH-Z19B", "CO2", "ppm", 0, 9999)'''
+            values(3, "GYSFDMAXB", "Longitude", "", 0, 360)'''
             )
 
         conn.execute('''INSERT INTO sensor(
             sensor_id, sensor_name, sensor_type, sensor_unit, sensor_min, sensor_max)
-            values(6, "GP2Y1026AU0F", "Dust", "mg/m³", 0, 9999)'''
+            values(4, "MH-Z19B", "CO2", "ppm", 0, 9999)'''
             )
 
         conn.execute('''INSERT INTO sensor(
             sensor_id, sensor_name, sensor_type, sensor_unit, sensor_min, sensor_max)
-            values(7, "MQ-135", "Gas", "", 0, 1000)'''
+            values(5, "GP2Y1026AU0F", "Dust", "mg/m³", 0, 9999)'''
+            )
+
+        conn.execute('''INSERT INTO sensor(
+            sensor_id, sensor_name, sensor_type, sensor_unit, sensor_min, sensor_max)
+            values(6, "MQ-135", "Gas", "", 0, 1000)'''
             )
 
         conn.commit()
         conn.close()
+        
+    def post_device_id(self):
+        connection = db.connect_air_database()
+        device_id = self.mac
+        cursor = connection.cursor()
+        try:
+            cursor.execute("INSERT INTO device VALUES(%s,%s)", (device_id, 'aaa'))
+            connection.commit()
+        except pymysql.Error as e:
+            print(e)
+        finally:
+            connection.close()
 
     def check_device_id(self):
         connection = db.connect_air_database()
-        device_id = 0
+        device_id = self.mac
+        cursor = connection.cursor()
         try:
-            with connection.cursor() as cursor:
-                cursor.execute("SELECT device_id FROM device WHERE device_id = %s", self.mac)
-                device_id = cursor.rowcount
+            cursor.execute("SELECT device_id FROM device WHERE device_id = %s", (self.mac,))
+            device_id = cursor.rowcount
         finally:
             connection.close()
 
         if device_id == self.mac:
-            lcd.message("Authentication", 1)
-            lcd.msssage("successful", 2)
 
             return True
-
-        self.lcd.message("Authentication", 1)
-        self.lcd.msssage("failed", 2)
 
         return False
 
@@ -125,25 +133,19 @@ class SetUp:
         random.seed(get_mac())
         self.mac = math.floor(random.random()*1000000)
         pymysql.install_as_MySQLdb()
-        self.lcd = jlcd.Jlcd(2,0x27,True)
 
     def check_device_id(self):
         connection = db.connect_air_database()
         device_id = 0
+        cursor = connection.cursor()
         try:
-            with connection.cursor() as cursor:
-                cursor.execute("SELECT device_id FROM device WHERE device_id = %s", self.mac)
-                device_id = cursor.rowcount
+            cursor.execute("SELECT device_id FROM device WHERE device_id = %s", (self.mac,))
+            device_id = cursor.fetchone()
         finally:
             connection.close()
 
-        if device_id == self.mac:
-            lcd.message("connection", 1)
-            lcd.msssage("successful", 2)
+        if device_id[0] == str(self.mac):
 
             return True
-
-        self.lcd.message("connection", 1)
-        self.lcd.msssage("failed", 2)
 
         return False
