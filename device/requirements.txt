@@ -1,4 +1,4 @@
-DateTime==4.3
+DateTime==4.8
 PyMySQL==0.10.1
 pytz==2020.4
 PyYAML==5.4
